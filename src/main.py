@@ -1,67 +1,24 @@
 from epaper import EPaper, EPD_WIDTH_BYTES, EPD_HEIGHT
-from draw_utils import draw_line, print_text_scaled, draw_frame, load_raw_image
+from draw_utils import print_text_scaled, load_raw_image
 from time import sleep
+import network
+import machine
+import secrets
+# from dotenv import load_dotenv
 
 
-def black_and_white_demo(epd):
-    print("init()")
-    epd.init()
-    print("clear()")
-    epd.clear()
-
-    # Create image buffers
-    gray = bytearray(EPD_WIDTH_BYTES * EPD_HEIGHT)
-    black = bytearray(EPD_WIDTH_BYTES * EPD_HEIGHT)
-
-    # Initialize buffers to white
-    for i in range(EPD_WIDTH_BYTES * EPD_HEIGHT):
-        gray[i] = 0xFF
-        black[i] = 0xFF
-
-    # Draw frame and test pattern
-    black = draw_frame(black)
-    for y in range(0, EPD_HEIGHT):
-        # 0x00 0x00 -> black
-        gray[y * EPD_WIDTH_BYTES] = 0x00
-        black[y * EPD_WIDTH_BYTES] = 0x00
-        # 0x00 0xFF -> dark gray
-        gray[y * EPD_WIDTH_BYTES + 1] = 0xFF
-        black[y * EPD_WIDTH_BYTES + 1] = 0x00
-        # 0xFF 0x00 -> light gray
-        gray[y * EPD_WIDTH_BYTES + 2] = 0x00
-        black[y * EPD_WIDTH_BYTES + 2] = 0xFF
-
-    # Draw diagonal line
-    draw_line(0, 0, 399, 299, gray, black, color=0)  # Draw black line
-
-    # Print test text
-    print_text_scaled("BLACK and WHITE demo", 16, 64, 2, gray, black, 0)
-
-    # Display the image
-    print("display()")
-    epd.display(black, True)
-    # Partial update
-    print("partial_display()")
-    width = 64
-    height = 48
-    bytes_width = width // 8
-    partial = bytearray(height * bytes_width)
-    for y in range(0, height):
-        for x in range(0, bytes_width):
-            if y % 8 < 4:
-                partial[x + y * bytes_width] = 0x0F
-            else:
-                partial[x + y * bytes_width] = 0xF0
-
-    print("partial display")
-    epd.display_window(partial, 0, 0, width, height)
-    sleep(1)
-    epd.display_window(partial, 64, 48, width, height)
-    sleep(1)
-    sleep(3)
+def do_connect(ssid, key):
+    wlan = network.WLAN()
+    wlan.active(True)
+    if not wlan.isconnected():
+        print("connecting to network...")
+        wlan.connect(ssid, key)
+        while not wlan.isconnected():
+            machine.idle()
+    print("network config:", wlan.ipconfig("addr4"))
 
 
-def four_gray_demo(epd):
+def timetable(epd):
     print("init_4gray()")
     epd.init_4gray()
     # Create image buffers
@@ -72,23 +29,7 @@ def four_gray_demo(epd):
         gray[i] = 0xFF
         black[i] = 0xFF
 
-    # Draw frame and test pattern
-    # black = draw_frame(black)
-    # for y in range(0, EPD_HEIGHT):
-    #     # 0x00 0x00 -> black
-    #     gray[y * EPD_WIDTH_BYTES] = 0x00
-    #     black[y * EPD_WIDTH_BYTES] = 0x00
-    #     # 0x00 0xFF -> dark gray
-    #     gray[y * EPD_WIDTH_BYTES + 1] = 0xFF
-    #     black[y * EPD_WIDTH_BYTES + 1] = 0x00
-    #     # 0xFF 0x00 -> light gray
-    #     gray[y * EPD_WIDTH_BYTES + 2] = 0x00
-    #     black[y * EPD_WIDTH_BYTES + 2] = 0xFF
-    # Draw diagonal line
-    # draw_line(0, 0, 399, 299, gray, black, color=1)  # Draw gray line
-
     # load raw image
-    # load_raw_image(gray, 100, 140, EPD_WIDTH_BYTES, "output_plane0.raw", 200, 113)
     load_raw_image(black, 0, 0, EPD_WIDTH_BYTES, "output_plane0.raw", 400, 300)
 
     # Display the image
@@ -136,11 +77,19 @@ def four_gray_demo(epd):
 
 
 if __name__ == "__main__":
+    # load_dotenv()
+
+    ssid = secrets.SSID
+    key = secrets.KEY
+
+    # Connect wifi
+    do_connect(ssid, key)
+
     # Initialize display
     epd = EPaper()
 
     # black_and_white_demo(epd)
-    four_gray_demo(epd)
+    timetable(epd)
 
     print("sleep()")
     epd.sleep()

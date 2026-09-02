@@ -9,8 +9,14 @@ wheels/
 # Virtual environments
 .venv
 
+# Miscellannous
 .cache/
 data/
 *.png
 *.jpg
 *.raw
+
+# Envs
+.env
+.env.*
+secrets.py

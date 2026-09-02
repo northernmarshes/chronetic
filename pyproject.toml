@@ -7,6 +7,7 @@ authors = [{ name = "northernmarshes", email = "northernmarshes@gmail.com" }]
 requires-python = ">=3.14"
 dependencies = [
     "mpremote>=1.29.0",
+    "network>=0.1",
 ]
 
 # [project.scripts]

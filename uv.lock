@@ -8,10 +8,14 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "mpremote" },
+    { name = "network" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "mpremote", specifier = ">=1.29.0" }]
+requires-dist = [
+    { name = "mpremote", specifier = ">=1.29.0" },
+    { name = "network", specifier = ">=0.1" },
+]
 
 [[package]]
 name = "mpremote"
@@ -25,6 +29,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/ac/b7/8c44eb606b0e53517
 wheels = [
     { url = "https://files.pythonhosted.org/packages/51/85/f68fbcfe4d1ce32a7f2154a48f68195d4f256e3700b69ad0d5b758ee3b37/mpremote-1.29.0-py3-none-any.whl", hash = "sha256:dedac688bcd65b9d4d5b7a66119332f2830000088321107994959333f53e41c8", size = 38653, upload-time = "2026-08-24T13:54:51.674Z" },
 ]
+
+[[package]]
+name = "network"
+version = "0.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/cb/72/0769291af36fb6020d000337ee219456ea779c03cf3124831e901f12ed13/network-0.1.tar.gz", hash = "sha256:786b171895c3ecaaf05948c29e206ab99285f328f799c3bbc5e22a2805bfc27f", size = 2765, upload-time = "2017-02-28T23:37:45.558Z" }
 
 [[package]]
 name = "platformdirs"

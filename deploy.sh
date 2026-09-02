@@ -23,13 +23,13 @@ check_and_copy() {
 }
 
 # Process all Python files in src directory
-for file in draw_utils.py font8x8.py epaper.py showcase.py; do
+for file in draw_utils.py font8x8.py epaper.py secrets.py; do
   if [ -f "src/$file" ]; then
     check_and_copy "src/$file"
   fi
 done
 
-# process all data files in data directory
+# Process all data files in data directory
 for file in src/data/*; do
   if [ -f "$file" ]; then
     check_and_copy "$file"
