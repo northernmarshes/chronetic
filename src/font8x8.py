@@ -1,12 +1,9 @@
 """
-source: https://github.com/stefdev49/esp32-4in2
-
 8x8 monospace bitmap font for rendering text on e-paper displays
 Based on the ZX Spectrum font style
 Each character is 8 pixels wide and 8 pixels high
 Each byte represents one row, with bits representing pixels (1=pixel on, 0=pixel off)
 """
-
 
 def reverse_byte(b):
     """Reverse the bits in a byte"""
@@ -14,7 +11,6 @@ def reverse_byte(b):
     b = ((b & 0xCC) >> 2) | ((b & 0x33) << 2)
     b = ((b & 0xAA) >> 1) | ((b & 0x55) << 1)
     return b
-
 
 # Font data for ASCII characters 0x20-0x7F (space through DEL) - ZX Spectrum style
 _RAW_FONT8X8 = [
@@ -209,9 +205,8 @@ _RAW_FONT8X8 = [
     # 0x7E (~)
     [0x31, 0x4A, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00],
     # 0x7F (DEL)
-    [0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x00],
+    [0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x00]
 ]
 
 # Create the font with reversed bits
 FONT8X8 = [[reverse_byte(row) for row in char] for char in _RAW_FONT8X8]
-
