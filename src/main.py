@@ -1,10 +1,21 @@
 from epaper import EPaper, EPD_WIDTH_BYTES, EPD_HEIGHT
 from draw_utils import print_text_scaled, load_raw_image
 from time import sleep
+import requests
+import json
 import network
 import machine
 import secrets
-# from dotenv import load_dotenv
+
+# Load eviormental variables
+SSID = secrets.SSID
+KEY = secrets.KEY
+API_URL = secrets.API_URL
+API_KEY = secrets.API_KEY
+LIST_ID = secrets.LIST_ID
+STOP_ID = secrets.STOP_ID
+TIMETABLE_ID = secrets.TIMETABLE_ID
+TEST_URL = secrets.TEST_URL
 
 
 def do_connect(ssid, key):
@@ -18,7 +29,24 @@ def do_connect(ssid, key):
     print("network config:", wlan.ipconfig("addr4"))
 
 
-def timetable(epd):
+# def get_buses(params) -> list:
+#     """Get list of busses from a certain spot"""
+#     buses_list = []
+#     r = requests.get(API_URL, params={"apikey": API_KEY, **params})
+#     r.raise_for_status()
+#     data = json.dumps(r.json(), indent=2, ensure_ascii=False)
+#     data = json.loads(data)
+#     for result in data["result"]:
+#         buses_list.append([item["value"] for item in result["values"]])
+#     return buses_list
+
+
+def fetch_test(url) -> str:
+    response = str((requests.get(url)).content)
+    return response
+
+
+def timetable(epd, test):
     print("init_4gray()")
     epd.init_4gray()
     # Create image buffers
@@ -29,13 +57,13 @@ def timetable(epd):
         gray[i] = 0xFF
         black[i] = 0xFF
 
-    # load raw image
+    # Load raw image
     load_raw_image(black, 0, 0, EPD_WIDTH_BYTES, "output_plane0.raw", 400, 300)
 
-    # Display the image
-    print("display_4gray()")
+    # Drawing data
+    print("Drawing data...")
 
-    # Print test text
+    # Departure times
     print_text_scaled("11:56", 2, 50, 2, gray, black, 0)
     print_text_scaled("12:05", 2, 80, 2, gray, black, 0)
     print_text_scaled("12:09", 2, 110, 2, gray, black, 0)
@@ -55,7 +83,7 @@ def timetable(epd):
 
     # Directions
     print_text_scaled("Dw. Wschodni", 170, 55, 1, gray, black, 0)
-    print_text_scaled("Esperanto", 170, 85, 1, gray, black, 0)
+    print_text_scaled(test, 170, 85, 1, gray, black, 0)
     print_text_scaled("Dw. Glowny", 170, 115, 1, gray, black, 0)
     print_text_scaled("Esperanto", 170, 145, 1, gray, black, 0)
     print_text_scaled("Dw. Glowny", 170, 175, 1, gray, black, 0)
@@ -77,19 +105,31 @@ def timetable(epd):
 
 
 if __name__ == "__main__":
-    # load_dotenv()
+    # Connect wifi and get data
+    do_connect(SSID, KEY)
 
-    ssid = secrets.SSID
-    key = secrets.KEY
+    # Test requests
+    print("Fetching test data...")
+    response = fetch_test(TEST_URL)
+    print("Response:", response)
 
-    # Connect wifi
-    do_connect(ssid, key)
+    # Fetch busstops
+    # buses = get_buses(
+    #     {
+    #         "id": LIST_ID,
+    #         "busstopId": STOP_ID,
+    #         "busstopNr": "04",
+    #     }
+    # )
+
+    # for bus in buses:
+    #     print(bus)
 
     # Initialize display
     epd = EPaper()
 
-    # black_and_white_demo(epd)
-    timetable(epd)
+    # Display UI
+    timetable(epd, response)
 
     print("sleep()")
     epd.sleep()
