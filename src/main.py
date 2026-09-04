@@ -16,9 +16,24 @@ LIST_ID = secrets.LIST_ID
 STOP_ID = secrets.STOP_ID
 TIMETABLE_ID = secrets.TIMETABLE_ID
 TEST_URL = secrets.TEST_URL
+STOP_NR = secrets.STOP_NR
+
+
+BUS_STOP_URL = (
+    API_URL
+    + "/?id="
+    + LIST_ID
+    + "&busstopId="
+    + STOP_ID
+    + "&busstopNr="
+    + STOP_NR
+    + "&apikey="
+    + API_KEY
+)
 
 
 def do_connect(ssid, key):
+    """Connect to the WIFI"""
     wlan = network.WLAN()
     wlan.active(True)
     if not wlan.isconnected():
@@ -29,11 +44,11 @@ def do_connect(ssid, key):
     print("network config:", wlan.ipconfig("addr4"))
 
 
-# def get_buses(params) -> list:
-#     """Get list of busses from a certain spot"""
+# def get_buses(url) -> list:
+#     """Get buses list for a bus stop"""
 #     buses_list = []
-#     r = requests.get(API_URL, params={"apikey": API_KEY, **params})
-#     r.raise_for_status()
+#     r = requests.get(url)
+#     # r.raise_for_status()
 #     data = json.dumps(r.json(), indent=2, ensure_ascii=False)
 #     data = json.loads(data)
 #     for result in data["result"]:
@@ -42,6 +57,7 @@ def do_connect(ssid, key):
 
 
 def fetch_test(url) -> str:
+    """Test the connection"""
     response = str((requests.get(url)).content)
     return response
 
@@ -82,8 +98,8 @@ def timetable(epd, test):
     print_text_scaled("123", 90, 230, 2, gray, black, 0)
 
     # Directions
-    print_text_scaled("Dw. Wschodni", 170, 55, 1, gray, black, 0)
-    print_text_scaled(test, 170, 85, 1, gray, black, 0)
+    print_text_scaled(test, 170, 55, 1, gray, black, 0)
+    print_text_scaled("Esperanto", 170, 85, 1, gray, black, 0)
     print_text_scaled("Dw. Glowny", 170, 115, 1, gray, black, 0)
     print_text_scaled("Esperanto", 170, 145, 1, gray, black, 0)
     print_text_scaled("Dw. Glowny", 170, 175, 1, gray, black, 0)
@@ -109,27 +125,27 @@ if __name__ == "__main__":
     do_connect(SSID, KEY)
 
     # Test requests
-    print("Fetching test data...")
-    response = fetch_test(TEST_URL)
-    print("Response:", response)
+    # print("Fetching test data...")
+    # test_response = fetch_test(TEST_URL)
+    # print("Response:", test_response)
 
-    # Fetch busstops
-    # buses = get_buses(
-    #     {
-    #         "id": LIST_ID,
-    #         "busstopId": STOP_ID,
-    #         "busstopNr": "04",
-    #     }
-    # )
+    # Fetching buses list
+    r = requests.get(BUS_STOP_URL)
+    buses_list = []
+    data = json.dumps(r.json())
+    data = json.loads(data)
+    for result in data["result"]:
+        buses_list.append([item["value"] for item in result["values"]])
 
-    # for bus in buses:
-    #     print(bus)
+    print("data:", buses_list)
+
+    first_bus = str(buses_list[0])
 
     # Initialize display
     epd = EPaper()
 
     # Display UI
-    timetable(epd, response)
+    timetable(epd, first_bus)
 
     print("sleep()")
     epd.sleep()
