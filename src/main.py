@@ -34,6 +34,10 @@ BUS_STOP_URL = (
 )
 
 
+def main():
+    pass
+
+
 def construct_timetable(bus: str) -> list:
     """Make a sorted list of all departures"""
     departures: list = []
@@ -119,7 +123,29 @@ def fetch_test(url) -> str:
     return test_response
 
 
-def timetable(epd, test, now, date):
+def draw_error():
+    # Initialize epd
+    print("init_4gray()")
+    epd.init_4gray()
+    # Create image buffers
+    gray = bytearray(EPD_WIDTH_BYTES * EPD_HEIGHT)
+    black = bytearray(EPD_WIDTH_BYTES * EPD_HEIGHT)
+    # Initialize buffers to white
+    for i in range(EPD_WIDTH_BYTES * EPD_HEIGHT):
+        gray[i] = 0xFF
+        black[i] = 0xFF
+
+    # Load raw image
+    # load_raw_image(black, 0, 0, EPD_WIDTH_BYTES, "output_plane0.raw", 400, 300)
+
+    print_text_scaled("ERROR", 150, 145, 3, gray, black, 0)
+
+    # epd.display(black)
+    epd.display_4gray(black, black)
+    sleep(2)
+
+
+def draw_timetable(epd, test, now, date):
     # Initialize epd
     print("init_4gray()")
     epd.init_4gray()
@@ -197,7 +223,6 @@ if __name__ == "__main__":
 
     # Get buses list
     buses_list = get_buses(BUS_STOP_URL)
-    print("data:", buses_list)
     first_bus = str(buses_list[0])
 
     # Get timetables
@@ -210,7 +235,10 @@ if __name__ == "__main__":
     epd = EPaper()
 
     # Display UI
-    timetable(epd, departures, now, date)
+    draw_timetable(epd, departures, now, date)
+
+    # Display error
+    # draw_error()
 
     print("sleep()")
     epd.sleep()
