@@ -54,6 +54,7 @@ class Chronetic(EPaper):
         self.current_hours = "{:02d}".format(timestamp[3] + utc)
         self.current_minutes = "{:02d}".format(timestamp[4])
         self.now = str(self.current_hours) + ":" + str(self.current_minutes)
+        self.departures = []
 
         self.date = (
             str(timestamp[0]) + "-" + str(timestamp[1]) + "-" + str(timestamp[2])
@@ -69,8 +70,7 @@ class Chronetic(EPaper):
         # Get timetables
         self.test = self.construct_timetable()
 
-        # for departure in departures:
-        #     print(departure)
+        self.test = self.sort_departures(self.test)
 
         # Initialize display
         self.epd = EPaper()
@@ -85,8 +85,7 @@ class Chronetic(EPaper):
         self.epd.sleep()
 
     def construct_timetable(self) -> list:
-        """Make a sorted list of all departures"""
-        departures: list = []
+        """Make a of all departures"""
         tt_url: str = self.make_tt_url()
         r = requests.get(tt_url)
         if r:
@@ -94,8 +93,6 @@ class Chronetic(EPaper):
         data = json.loads(json.dumps(r.json()))
 
         # Create one departure
-        departures: list = []
-
         for result in data["result"]:
             single_departure: list = []
             time = str(result[5]["value"])[:-3]
@@ -106,13 +103,20 @@ class Chronetic(EPaper):
                 true_hours = "{:02d}".format(true_hours)
                 true_minutes = "{:02d}".format(minutes)
                 time = str(true_hours) + ":" + str(true_minutes)
+            mam = int(time[:2]) * 60 + int(time[-2:])
+            # print("timestamp:", time, time[:2], time[-2:], mam)
             single_departure.append(time)
             single_departure.append(self.first_bus)
             single_departure.append(result[3]["value"])
             single_departure.append("Rondo K.")
-            departures.append(single_departure)
+            single_departure.append(mam)
+            self.departures.append(single_departure)
 
-        return departures
+        return self.departures
+
+    def sort_departures(self, deps):
+        sorted_departures = sorted(deps, key=lambda x: x[4])
+        return sorted_departures
 
     def make_tt_url(self) -> str:
         "Construct url for each line"
