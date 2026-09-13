@@ -20,3 +20,8 @@ data/
 .env
 .env.*
 secrets.py
+
+# Back
+target/
+test_data/
+config.toml
