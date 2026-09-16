@@ -59,25 +59,26 @@ class Chronetic(EPaper):
         """Fetch json and parse to list"""
         self.test: list = []
         r = requests.get(URI)
+        time.sleep(10)
         dump = json.dumps(r.json())
         data = json.loads(dump)
         count = 0
         for result in data["result"]:
             if count < 7:
                 single_departure: list = []
-                time = str(result[5]["value"])[:-3]
-                hours = int(time[:-3])
-                minutes = int(time[-2:])
+                time_now = str(result[0]["value"])[:-3]
+                hours = int(time_now[:-3])
+                minutes = int(time_now[-2:])
                 if hours >= 24:
                     true_hours = hours - 24
                     true_hours = "{:02d}".format(true_hours)
                     true_minutes = "{:02d}".format(minutes)
-                    time = str(true_hours) + ":" + str(true_minutes)
-                mam = int(time[:2]) * 60 + int(time[-2:])
-                single_departure.append(time)
-                single_departure.append("111")
+                    time_now = str(true_hours) + ":" + str(true_minutes)
+                mam = int(time_now[:2]) * 60 + int(time_now[-2:])
+                single_departure.append(time_now)
+                single_departure.append(result[1]["value"])
+                single_departure.append(result[2]["value"])
                 single_departure.append(result[3]["value"])
-                single_departure.append("Rondo K.")
                 single_departure.append(mam)
                 self.test.append(single_departure)
                 count += 1

@@ -24,13 +24,13 @@ check_and_copy() {
 
 # Process all Python files in front directory
 for file in draw_utils.py font8x8.py epaper.py secrets.py; do
-  if [ -f "front/$file" ]; then
-    check_and_copy "front/$file"
+  if [ -f "src/$file" ]; then
+    check_and_copy "src/$file"
   fi
 done
 
 # Process all data files in data directory
-for file in front/data/*; do
+for file in src/data/*; do
   if [ -f "$file" ]; then
     check_and_copy "$file"
   fi
@@ -38,7 +38,7 @@ done
 
 if [ $# -eq 0 ]; then
   echo "Running main.py..."
-  uv run mpremote run front/main.py
+  uv run mpremote run src/main.py
 else
   echo "Running $@..."
   uv run mpremote run $@
