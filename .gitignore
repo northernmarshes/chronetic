@@ -11,10 +11,8 @@ wheels/
 
 # Miscellannous
 .cache/
-data/
-*.png
 *.jpg
-*.raw
+ui/
 
 # Envs
 .env
