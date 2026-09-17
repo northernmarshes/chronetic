@@ -17,18 +17,21 @@ URI = secrets.URI
 
 def main():
     app = Chronetic()
-    app.run()
+    while 1:
+        app.run()
+        time.sleep(60)
 
 
 class Chronetic(EPaper):
     def __init__(self):
         super().__init__()
 
+    def run(self):
         # Connect wifi and get data
         self.connect_wifi()
-
         # Get current time
         ntptime.settime()
+        sleep(2)
         timestamp = time.localtime()
         utc = 2
 
@@ -42,8 +45,6 @@ class Chronetic(EPaper):
         )
         print("date:", self.date)
         print("time:", self.now)
-
-    def run(self):
         # Initialize display
         self.epd = EPaper()
 
@@ -59,7 +60,7 @@ class Chronetic(EPaper):
         """Fetch json and parse to list"""
         self.test: list = []
         r = requests.get(URI)
-        time.sleep(10)
+        time.sleep(3)
         dump = json.dumps(r.json())
         data = json.loads(dump)
         count = 0
@@ -77,7 +78,7 @@ class Chronetic(EPaper):
                 mam = int(time_now[:2]) * 60 + int(time_now[-2:])
                 single_departure.append(time_now)
                 single_departure.append(result[1]["value"])
-                single_departure.append(result[2]["value"])
+                single_departure.append(result[2]["value"][:15])
                 single_departure.append(result[3]["value"])
                 single_departure.append(mam)
                 self.test.append(single_departure)
@@ -129,13 +130,22 @@ class Chronetic(EPaper):
         print_text_scaled(self.test[6][2], 170, 235, 1, gray, black, 0)
 
         # Stops
-        print_text_scaled(self.test[0][3], 320, 55, 1, gray, black, 0)
-        print_text_scaled(self.test[1][3], 320, 85, 1, gray, black, 0)
-        print_text_scaled(self.test[2][3], 320, 115, 1, gray, black, 0)
-        print_text_scaled(self.test[3][3], 320, 145, 1, gray, black, 0)
-        print_text_scaled(self.test[4][3], 320, 175, 1, gray, black, 0)
-        print_text_scaled(self.test[5][3], 320, 205, 1, gray, black, 0)
-        print_text_scaled(self.test[6][3], 320, 235, 1, gray, black, 0)
+        print_text_scaled(self.test[0][3], 320, 55, 2, gray, black, 0)
+        print_text_scaled(self.test[1][3], 320, 85, 2, gray, black, 0)
+        print_text_scaled(self.test[2][3], 320, 115, 2, gray, black, 0)
+        print_text_scaled(self.test[3][3], 320, 145, 2, gray, black, 0)
+        print_text_scaled(self.test[4][3], 320, 175, 2, gray, black, 0)
+        print_text_scaled(self.test[5][3], 320, 205, 2, gray, black, 0)
+        print_text_scaled(self.test[6][3], 320, 235, 2, gray, black, 0)
+
+        # Min
+        print_text_scaled("min", 360, 60, 1, gray, black, 0)
+        print_text_scaled("min", 360, 90, 1, gray, black, 0)
+        print_text_scaled("min", 360, 120, 1, gray, black, 0)
+        print_text_scaled("min", 360, 150, 1, gray, black, 0)
+        print_text_scaled("min", 360, 180, 1, gray, black, 0)
+        print_text_scaled("min", 360, 210, 1, gray, black, 0)
+        print_text_scaled("min", 360, 240, 1, gray, black, 0)
 
         # Time
         print_text_scaled(self.now, 310, 274, 2, gray, black, 0)

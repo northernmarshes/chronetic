@@ -9,8 +9,8 @@ fn main() {
     let address = IP;
     let listener = TcpListener::bind(address).unwrap();
     for stream in listener.incoming() {
+        println!("Fetching departures...");
         let res = timetable::run();
-        println!("it's the response: {}", res);
         let stream = stream.unwrap();
         handle_connection(stream, res);
     }

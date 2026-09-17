@@ -43,29 +43,10 @@ pub struct TimetableKV {
     pub value: Option<String>,
 }
 
-// #[derive(Serialize)]
-// pub struct Post {
-//     title: String,
-//     created: String,
-//     link: String,
-//     description: String,
-//     content: String,
-//     author: String,
-// }
-//
 #[derive(Serialize)]
 pub struct Output {
     result: Vec<Vec<KeyValue>>,
 }
-
-// #[derive(Serialize)]
-// pub struct NextDeparture {
-//     time: String,
-//     number: String,
-//     direction: String,
-//     stop: String,
-// }
-
 pub fn get_buses() -> Vec<String> {
     let mut buses: Vec<String> = Vec::new();
     let url = format!(
@@ -102,7 +83,7 @@ pub fn get_departures(bus: String) -> Departures {
     let body = body.as_str();
     let timetable: Timetable = serde_json::from_str(body).unwrap();
 
-    let dap: Vec<Departure> = timetable
+    let dep: Vec<Departure> = timetable
         .result
         .iter()
         .map(|group| {
@@ -122,7 +103,7 @@ pub fn get_departures(bus: String) -> Departures {
         })
         .collect();
 
-    Departures { departures: dap }
+    Departures { departures: dep }
 }
 
 pub fn time_to_mam(timestamp: &str) -> u16 {
@@ -139,7 +120,7 @@ pub fn mam_to_time(mam: u16) -> String {
         hours = mam / 60;
         minutes = mam % 60;
     }
-    let time = format!("{:02}:{}:00", hours, minutes);
+    let time = format!("{:02}:{:02}:00", hours, minutes);
     time
 }
 
@@ -151,24 +132,10 @@ pub fn current_time() -> u16 {
     mam
 }
 
-// pub fn construct_response(departures: Departures) -> String {
-//     let mut displayed = 0;
-//     for d in departures.departures {
-//         if d.mam > time && displayed <= 6 {
-//             let left = d.mam - time;
-//             println!(
-//                 "Line: {}, Direction: {}, Leaves in {} minutes, Departure: {}",
-//                 d.line, d.direction, left, time
-//             );
-//             displayed += 1;
-//         }
-//     }
-// }
-
 pub fn run() -> String {
     let time = current_time();
-    let now = chrono::Local::now();
-    println!("time: {now}");
+    let _now = chrono::Local::now();
+    // println!("time: {now}");
     let data = get_buses();
     let mut all: Vec<Departures> = Vec::new();
     for bus in data {
@@ -181,154 +148,40 @@ pub fn run() -> String {
 
     // Sorting next departures
     combined.departures.sort_by_key(|d| d.mam);
-    // let mut displayed = 0;
 
-    // for d in combined.departures {
-    //     if d.mam > time && displayed <= 6 {
-    //         let left = d.mam - time;
-    //         println!(
-    //             "Line: {}, Direction: {}, Leaves in {} minutes, Departure: {}",
-    //             d.line, d.direction, left, time
-    //         );
-    //         displayed += 1;
-    //     }
-    // }
+    let mut displayed = 0;
 
     let mut departures: Vec<Vec<KeyValue>> = Vec::new();
-    let post_0 = vec![
-        KeyValue {
-            key: "time".to_string(),
-            value: mam_to_time(combined.departures[0].mam).to_string(),
-        },
-        KeyValue {
-            key: "number".to_string(),
-            value: combined.departures[0].line.to_string(),
-        },
-        KeyValue {
-            key: "direction".to_string(),
-            value: combined.departures[0].direction.to_string(),
-        },
-        KeyValue {
-            key: "stop".to_string(),
-            value: "Stacja".to_string(),
-        },
-    ];
-
-    let post_1 = vec![
-        KeyValue {
-            key: "time".to_string(),
-            value: "12:22:00".to_string(),
-        },
-        KeyValue {
-            key: "number".to_string(),
-            value: "123".to_string(),
-        },
-        KeyValue {
-            key: "direction".to_string(),
-            value: "Avalon".to_string(),
-        },
-        KeyValue {
-            key: "stop".to_string(),
-            value: "Zwyciezcow".to_string(),
-        },
-    ];
-    let post_2 = vec![
-        KeyValue {
-            key: "time".to_string(),
-            value: "12:22:00".to_string(),
-        },
-        KeyValue {
-            key: "number".to_string(),
-            value: "123".to_string(),
-        },
-        KeyValue {
-            key: "direction".to_string(),
-            value: "Avalon".to_string(),
-        },
-        KeyValue {
-            key: "stop".to_string(),
-            value: "Zwyciezcow".to_string(),
-        },
-    ];
-    let post_3 = vec![
-        KeyValue {
-            key: "time".to_string(),
-            value: "12:22:00".to_string(),
-        },
-        KeyValue {
-            key: "number".to_string(),
-            value: "123".to_string(),
-        },
-        KeyValue {
-            key: "direction".to_string(),
-            value: "Avalon".to_string(),
-        },
-        KeyValue {
-            key: "stop".to_string(),
-            value: "Zwyciezcow".to_string(),
-        },
-    ];
-    let post_4 = vec![
-        KeyValue {
-            key: "time".to_string(),
-            value: "12:22:00".to_string(),
-        },
-        KeyValue {
-            key: "number".to_string(),
-            value: "123".to_string(),
-        },
-        KeyValue {
-            key: "direction".to_string(),
-            value: "Avalon".to_string(),
-        },
-        KeyValue {
-            key: "stop".to_string(),
-            value: "Zwyciezcow".to_string(),
-        },
-    ];
-    let post_5 = vec![
-        KeyValue {
-            key: "time".to_string(),
-            value: "12:22:00".to_string(),
-        },
-        KeyValue {
-            key: "number".to_string(),
-            value: "123".to_string(),
-        },
-        KeyValue {
-            key: "direction".to_string(),
-            value: "Avalon".to_string(),
-        },
-        KeyValue {
-            key: "stop".to_string(),
-            value: "Zwyciezcow".to_string(),
-        },
-    ];
-    let post_6 = vec![
-        KeyValue {
-            key: "time".to_string(),
-            value: "12:22:00".to_string(),
-        },
-        KeyValue {
-            key: "number".to_string(),
-            value: "123".to_string(),
-        },
-        KeyValue {
-            key: "direction".to_string(),
-            value: "Avalon".to_string(),
-        },
-        KeyValue {
-            key: "stop".to_string(),
-            value: "Zwyciezcow".to_string(),
-        },
-    ];
-    departures.push(post_0);
-    departures.push(post_1);
-    departures.push(post_2);
-    departures.push(post_3);
-    departures.push(post_4);
-    departures.push(post_5);
-    departures.push(post_6);
+    for d in combined.departures {
+        if d.mam > time && displayed <= 6 {
+            let left = d.mam - time;
+            let post = vec![
+                KeyValue {
+                    key: "time".to_string(),
+                    value: mam_to_time(d.mam).to_string(),
+                },
+                KeyValue {
+                    key: "number".to_string(),
+                    value: d.line.to_string(),
+                },
+                KeyValue {
+                    key: "direction".to_string(),
+                    value: d.direction.to_string(),
+                },
+                KeyValue {
+                    key: "stop".to_string(),
+                    value: left.to_string(),
+                    // value: "Stacja".to_string(),
+                },
+            ];
+            departures.push(post);
+            // println!(
+            //     "Line: {}, Direction: {}, Leaves in {} minutes, Departure: {}",
+            //     d.line, d.direction, left, time
+            // );
+            displayed += 1;
+        }
+    }
 
     let result = Output { result: departures };
 
