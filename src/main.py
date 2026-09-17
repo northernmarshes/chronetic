@@ -25,11 +25,15 @@ def main():
 class Chronetic(EPaper):
     def __init__(self):
         super().__init__()
+
         # Connect wifi and get data
         self.connect_wifi()
-        # Get current time
+        # self.draw_word("Connected! UwU")
         time.sleep(30)
+
+        # Get current time
         ntptime.settime()
+        # self.draw_word("Time is set! C:")
         sleep(10)
 
     def run(self):
@@ -189,7 +193,23 @@ class Chronetic(EPaper):
 
         # epd.display(black)
         self.epd.display_4gray(black, black)
-        sleep(2)
+
+    # def draw_word(self, word):
+    #     # Initialize epd
+    #     print("init_4gray()")
+    #     self.epd.init_4gray()
+    #     # Create image buffers
+    #     gray = bytearray(EPD_WIDTH_BYTES * EPD_HEIGHT)
+    #     black = bytearray(EPD_WIDTH_BYTES * EPD_HEIGHT)
+    #     # Initialize buffers to white
+    #     for i in range(EPD_WIDTH_BYTES * EPD_HEIGHT):
+    #         gray[i] = 0xFF
+    #         black[i] = 0xFF
+    #     print_text_scaled(word, 150, 145, 3, gray, black, 0)
+    #
+    #     # epd.display(black)
+    #     self.epd.display_4gray(black, black)
+    #     sleep(2)
 
 
 if __name__ == "__main__":

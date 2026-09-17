@@ -96,7 +96,10 @@ pub fn get_departures(bus: String) -> Departures {
                     .and_then(|kv| kv.value.clone())
             };
             let timestamp = find("czas").unwrap();
-            let mam_now = time_to_mam(&timestamp);
+            let mut mam_now = time_to_mam(&timestamp);
+            if mam_now > 1440 {
+                mam_now -= 1440;
+            }
             Departure {
                 line: bus.clone(),
                 direction: find("kierunek").unwrap(),
