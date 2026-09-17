@@ -19,19 +19,20 @@ def main():
     app = Chronetic()
     while 1:
         app.run()
-        time.sleep(60)
+        time.sleep(30)
 
 
 class Chronetic(EPaper):
     def __init__(self):
         super().__init__()
-
-    def run(self):
         # Connect wifi and get data
         self.connect_wifi()
         # Get current time
+        time.sleep(30)
         ntptime.settime()
-        sleep(2)
+        sleep(10)
+
+    def run(self):
         timestamp = time.localtime()
         utc = 2
 
@@ -59,8 +60,13 @@ class Chronetic(EPaper):
     def get_data(self):
         """Fetch json and parse to list"""
         self.test: list = []
-        r = requests.get(URI)
-        time.sleep(3)
+        r = None
+        while r is None:
+            try:
+                r = requests.get(URI)
+            except:
+                pass
+        # time.sleep(20)
         dump = json.dumps(r.json())
         data = json.loads(dump)
         count = 0
@@ -78,7 +84,9 @@ class Chronetic(EPaper):
                 mam = int(time_now[:2]) * 60 + int(time_now[-2:])
                 single_departure.append(time_now)
                 single_departure.append(result[1]["value"])
-                single_departure.append(result[2]["value"][:15])
+                destination = result[2]["value"]
+                destination = " ".join(destination.split()[:2])
+                single_departure.append(destination)
                 single_departure.append(result[3]["value"])
                 single_departure.append(mam)
                 self.test.append(single_departure)

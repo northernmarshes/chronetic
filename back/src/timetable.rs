@@ -48,6 +48,7 @@ pub struct Output {
     result: Vec<Vec<KeyValue>>,
 }
 pub fn get_buses() -> Vec<String> {
+    // Get list of all buses from a busstop
     let mut buses: Vec<String> = Vec::new();
     let url = format!(
         "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
@@ -70,6 +71,7 @@ pub fn get_buses() -> Vec<String> {
 }
 
 pub fn get_departures(bus: String) -> Departures {
+    // Get all departures of a bus
     let url = format!(
         "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
         std::env::var("URL").unwrap(),
@@ -107,6 +109,7 @@ pub fn get_departures(bus: String) -> Departures {
 }
 
 pub fn time_to_mam(timestamp: &str) -> u16 {
+    // Convert time to minutes after midnight
     let time: Vec<&str> = timestamp.split(":").collect();
     let hours: u16 = time[0].parse().unwrap_or(0);
     let minutes = time[1].parse().unwrap_or(0);
@@ -114,6 +117,7 @@ pub fn time_to_mam(timestamp: &str) -> u16 {
 }
 
 pub fn mam_to_time(mam: u16) -> String {
+    // Convert minutes after midnight to time
     let mut hours = 0;
     let mut minutes = 0;
     if mam > 60 {
@@ -125,6 +129,7 @@ pub fn mam_to_time(mam: u16) -> String {
 }
 
 pub fn current_time() -> u16 {
+    // Get current time
     let now = chrono::Local::now();
     let hours: u16 = now.hour() as u16;
     let minutes: u16 = now.minute() as u16;
@@ -133,9 +138,9 @@ pub fn current_time() -> u16 {
 }
 
 pub fn run() -> String {
+    // Get json with next seven departures
     let time = current_time();
     let _now = chrono::Local::now();
-    // println!("time: {now}");
     let data = get_buses();
     let mut all: Vec<Departures> = Vec::new();
     for bus in data {
@@ -150,7 +155,6 @@ pub fn run() -> String {
     combined.departures.sort_by_key(|d| d.mam);
 
     let mut displayed = 0;
-
     let mut departures: Vec<Vec<KeyValue>> = Vec::new();
     for d in combined.departures {
         if d.mam > time && displayed <= 6 {
@@ -175,10 +179,6 @@ pub fn run() -> String {
                 },
             ];
             departures.push(post);
-            // println!(
-            //     "Line: {}, Direction: {}, Leaves in {} minutes, Departure: {}",
-            //     d.line, d.direction, left, time
-            // );
             displayed += 1;
         }
     }
