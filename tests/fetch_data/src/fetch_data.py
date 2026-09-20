@@ -2,6 +2,7 @@ import secrets
 import json
 import requests
 import pytest
+import time
 
 URI = secrets.URI
 
@@ -13,7 +14,9 @@ def fetch_test() -> list:
         try:
             r = requests.get(URI)
         except:
-            print("Fetching failed, traing again...")
+            print("Fetching failed, trying again...")
+            time.sleep(2)
+
     dump = json.dumps(r.json())
     data = json.loads(dump)
     count = 0

@@ -1,7 +1,7 @@
 use ::reqwest;
 use ::serde::Deserialize;
 use ::serde_json;
-use chrono::Timelike;
+use chrono::{NaiveDate, Timelike};
 use serde::Serialize;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -52,6 +52,9 @@ pub struct App {
     pub sorted_timetable: Option<Departures>,
     pub url: String,
     pub time_now: u16,
+    pub last_fetch: Option<NaiveDate>,
+    pub output: Option<String>,
+    pub today: Option<NaiveDate>,
 }
 
 impl App {
@@ -65,12 +68,18 @@ impl App {
             std::env::var("API_KEY").unwrap(),
         );
         let time_now = 0;
+        let today = None;
+        let last_fetch = None;
         let sorted_timetable = None;
+        let output = None;
 
         App {
             time_now,
             url,
             sorted_timetable,
+            output,
+            today,
+            last_fetch,
         }
     }
 
@@ -78,32 +87,60 @@ impl App {
         // Get json with next seven departures
         self.set_time();
 
-        if self.sorted_timetable.is_some() {
+        if self.sorted_timetable.is_some() && self.today == self.last_fetch {
             println!("Timetable already fetched")
         } else {
-            println!("Fetching departures...");
-            let data = self.get_buses();
-            let mut all: Vec<Departures> = Vec::new();
-            for bus in data {
-                let departures = self.get_departures(bus);
-                all.push(departures);
-            }
-            let mut combined = Departures {
-                departures: all.into_iter().flat_map(|d| d.departures).collect(),
-            };
-
-            // Sorting next departures
-            combined.departures.sort_by_key(|d| d.mam);
-            let sorted = combined.clone();
-            self.sorted_timetable = Some(sorted);
+            self.fetch();
         };
 
+        let sorted = self.sorted_timetable.clone().unwrap();
+        self.prepare_output(sorted);
+        self.output.clone().unwrap()
+    }
+
+    pub fn get_buses(&self) -> Vec<String> {
+        // Get list of all buses from a bus stop
+        let mut buses: Vec<String> = Vec::new();
+
+        let body = reqwest::blocking::get(&self.url).unwrap().text().unwrap();
+        let body = body.as_str();
+        let response: Response = serde_json::from_str(body).unwrap();
+        for item in &response.result {
+            for kv in &item.values {
+                buses.push(kv.value.clone());
+            }
+        }
+        buses
+    }
+
+    pub fn fetch(&mut self) {
+        // Fetch bus departures from API
+        println!("Fetching departures...");
+        let data = self.get_buses();
+        let mut all: Vec<Departures> = Vec::new();
+        for bus in data {
+            let departures = self.get_departures(bus);
+            all.push(departures);
+        }
+        let combined = Departures {
+            departures: all.into_iter().flat_map(|d| d.departures).collect(),
+        };
+        self.sort(combined);
+        self.last_fetch = Some(chrono::Local::now().date_naive());
+    }
+
+    pub fn sort(&mut self, mut combined: Departures) {
+        // Sort departures
+        combined.departures.sort_by_key(|d| d.mam);
+        let sorted = combined.clone();
+        self.sorted_timetable = Some(sorted);
+    }
+
+    pub fn prepare_output(&mut self, sorted: Departures) {
+        // Prepare json with 7 next departures
         let mut counter = 0;
         let now = self.time_now;
         let mut departures: Vec<Vec<KeyValue>> = Vec::new();
-
-        let sorted = self.sorted_timetable.clone().unwrap();
-
         for d in sorted.departures {
             if d.mam > now && counter <= 6 {
                 let left = d.mam - now;
@@ -132,23 +169,7 @@ impl App {
         }
 
         let result = Output { result: departures };
-
-        serde_json::to_string(&result).unwrap()
-    }
-
-    pub fn get_buses(&self) -> Vec<String> {
-        // Get list of all buses from a busstop
-        let mut buses: Vec<String> = Vec::new();
-
-        let body = reqwest::blocking::get(&self.url).unwrap().text().unwrap();
-        let body = body.as_str();
-        let response: Response = serde_json::from_str(body).unwrap();
-        for item in &response.result {
-            for kv in &item.values {
-                buses.push(kv.value.clone());
-            }
-        }
-        buses
+        self.output = Some(serde_json::to_string(&result).unwrap());
     }
 
     pub fn get_departures(&self, bus: String) -> Departures {
@@ -216,8 +237,10 @@ impl App {
         // Set time
         let now = chrono::Local::now();
         let hours: u16 = now.hour() as u16;
+        let date = now.date_naive();
         let minutes: u16 = now.minute() as u16;
         let mam: u16 = hours * 60 + minutes;
+        self.today = Some(date);
         self.time_now = mam;
     }
 }

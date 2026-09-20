@@ -1,4 +1,3 @@
-// use std::fs;
 use crate::timetable::App;
 use std::io::{BufReader, prelude::*};
 use std::net::{TcpListener, TcpStream};
@@ -24,8 +23,6 @@ fn handle_connection(mut stream: TcpStream, contents: String) {
         .map(|result| result.unwrap())
         .take_while(|line| !line.is_empty())
         .collect();
-    // let file_path = "test_data/model_response.json";
-    // let contents: String = fs::read_to_string(file_path).unwrap();
     let response = format!("HTTP/1.1 200 OK\r\n\r\n{contents}");
     stream.write_all(response.as_bytes()).unwrap();
 }
