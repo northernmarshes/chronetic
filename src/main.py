@@ -35,21 +35,23 @@ class Chronetic(EPaper):
         sleep(10)
 
     def run(self):
-        timestamp = time.localtime()
-        utc = 2
+        # timestamp = time.localtime()
+        local_time = time.localtime()
+        timestamp = time.localtime(time.mktime(local_time) + (2 * 3600))
+        # print("timestamp now is:", timestamp)
+        today = timestamp[2]
 
-        self.current_hours = "{:02d}".format(timestamp[3] + utc)
-        if self.current_hours == "24":
-            self.current_hours = "00"
+        self.current_hours = "{:02d}".format(timestamp[3])
+        # print("current_hours is:", self.current_hours)
         self.current_minutes = "{:02d}".format(timestamp[4])
         self.now = str(self.current_hours) + ":" + str(self.current_minutes)
         self.departures = []
 
-        self.date = (
-            str(timestamp[0]) + "-" + str(timestamp[1]) + "-" + str(timestamp[2])
-        )
-        print("date:", self.date)
-        print("time:", self.now)
+        self.date = str(timestamp[0]) + "-" + str(timestamp[1]) + "-" + str(today)
+        # print("self.date is: ", self.date)
+        # print("date:", self.date)
+        # print("time:", self.now)
+
         # Initialize display
         self.epd = EPaper()
 
