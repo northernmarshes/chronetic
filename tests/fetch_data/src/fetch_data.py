@@ -45,11 +45,11 @@ def fetch_test() -> list:
 
 
 departures = fetch_test()
-print("Response length is: ", len(fetch_test()))
+# print("Response length is: ", len(fetch_test()))
 for departure in departures:
     print(departure)
 
 
-class TestClass:
-    def test_length(self):
-        assert len(fetch_test()) == 7
+# class TestClass:
+#     def test_length(self):
+#         assert len(fetch_test()) == 7

@@ -94,6 +94,12 @@ impl App {
         };
 
         let sorted = self.sorted_timetable.clone().unwrap();
+
+        // Print all sorted list
+        // for d in &sorted.departures {
+        //     println!("{:?}", d);
+        // }
+
         self.prepare_output(sorted);
         self.output.clone().unwrap()
     }
@@ -141,7 +147,7 @@ impl App {
         let mut counter = 0;
         let now = self.time_now;
         let mut departures: Vec<Vec<KeyValue>> = Vec::new();
-        for d in sorted.departures {
+        for d in sorted.departures.clone() {
             if d.mam > now && counter <= 6 {
                 let left = d.mam - now;
                 let post = vec![
@@ -167,6 +173,40 @@ impl App {
                 counter += 1;
             }
         }
+
+        //TODO: add departures after midnight if output is shorter then 7
+        // if departures.len() < 6 {
+        //     let lack = 7 - departures.len();
+        //     println!("Brakuje: {}", lack);
+        //     let mut counter = 0;
+        //     for d in sorted.departures.clone() {
+        //         if counter <= (lack - 1) {
+        //             println!("dodaje {:?}", d);
+        //             let left = d.mam - now;
+        //             let post = vec![
+        //                 KeyValue {
+        //                     key: "time".to_string(),
+        //                     value: self.mam_to_time(d.mam).to_string(),
+        //                 },
+        //                 KeyValue {
+        //                     key: "number".to_string(),
+        //                     value: d.line.to_string(),
+        //                 },
+        //                 KeyValue {
+        //                     key: "direction".to_string(),
+        //                     value: d.direction.to_string(),
+        //                 },
+        //                 KeyValue {
+        //                     key: "stop".to_string(),
+        //                     value: left.to_string(),
+        //                     // value: "Stacja".to_string(),
+        //                 },
+        //             ];
+        //             departures.push(post);
+        //             counter += 1;
+        //         }
+        //     }
+        // }
 
         let result = Output { result: departures };
         self.output = Some(serde_json::to_string(&result).unwrap());
@@ -224,10 +264,12 @@ impl App {
     pub fn mam_to_time(&self, mam: u16) -> String {
         // Convert minutes after midnight to time
         let mut hours = 0;
-        let mut minutes = 0;
+        let minutes: u16;
         if mam > 60 {
             hours = mam / 60;
             minutes = mam % 60;
+        } else {
+            minutes = mam;
         }
         let time = format!("{:02}:{:02}:00", hours, minutes);
         time
