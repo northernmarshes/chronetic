@@ -1,4 +1,5 @@
 // use std::fs;
+use crate::timetable::App;
 use std::io::{BufReader, prelude::*};
 use std::net::{TcpListener, TcpStream};
 mod timetable;
@@ -8,9 +9,10 @@ const IP: &str = env!("IP");
 fn main() {
     let address = IP;
     let listener = TcpListener::bind(address).unwrap();
+    let mut app = App::new();
     for stream in listener.incoming() {
         println!("Fetching departures...");
-        let res = timetable::run();
+        let res = app.run();
         let stream = stream.unwrap();
         handle_connection(stream, res);
     }

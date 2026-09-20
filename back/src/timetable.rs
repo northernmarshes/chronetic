@@ -3,7 +3,6 @@ use ::serde::Deserialize;
 use ::serde_json;
 use chrono::Timelike;
 use serde::Serialize;
-// use serde_json_core::heapless::Vec;
 
 #[derive(Deserialize, Debug)]
 pub struct Departures {
@@ -49,6 +48,7 @@ pub struct Output {
     result: Vec<Vec<KeyValue>>,
 }
 
+// #[derive(Clone)]
 pub struct App {
     pub sorted_timetable: Option<Departures>,
     pub url: String,
@@ -75,7 +75,7 @@ impl App {
         }
     }
 
-    pub fn run(self) -> String {
+    pub fn run(&mut self) -> String {
         // Get json with next seven departures
         self.set_time();
         let _now = chrono::Local::now();
@@ -93,10 +93,11 @@ impl App {
         combined.departures.sort_by_key(|d| d.mam);
 
         let mut displayed = 0;
+        let now = self.time_now;
         let mut departures: Vec<Vec<KeyValue>> = Vec::new();
         for d in combined.departures {
-            if d.mam > time && displayed <= 6 {
-                let left = d.mam - self.time_now;
+            if d.mam > now && displayed <= 6 {
+                let left = d.mam - now;
                 let post = vec![
                     KeyValue {
                         key: "time".to_string(),
@@ -126,7 +127,7 @@ impl App {
         serde_json::to_string(&result).unwrap()
     }
 
-    pub fn get_buses(self) -> Vec<String> {
+    pub fn get_buses(&self) -> Vec<String> {
         // Get list of all buses from a busstop
         let mut buses: Vec<String> = Vec::new();
 
@@ -141,7 +142,7 @@ impl App {
         buses
     }
 
-    pub fn get_departures(self, bus: String) -> Departures {
+    pub fn get_departures(&self, bus: String) -> Departures {
         // Get all departures of a bus
         let url = format!(
             "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
@@ -182,7 +183,7 @@ impl App {
         Departures { departures: dep }
     }
 
-    pub fn time_to_mam(self, timestamp: &str) -> u16 {
+    pub fn time_to_mam(&self, timestamp: &str) -> u16 {
         // Convert time to minutes after midnight
         let time: Vec<&str> = timestamp.split(":").collect();
         let hours: u16 = time[0].parse().unwrap_or(0);
@@ -190,7 +191,7 @@ impl App {
         hours * 60 + minutes
     }
 
-    pub fn mam_to_time(self, mam: u16) -> String {
+    pub fn mam_to_time(&self, mam: u16) -> String {
         // Convert minutes after midnight to time
         let mut hours = 0;
         let mut minutes = 0;
