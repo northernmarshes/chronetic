@@ -11,7 +11,6 @@ fn main() {
     let listener = TcpListener::bind(address).unwrap();
     let mut app = App::new();
     for stream in listener.incoming() {
-        println!("Fetching departures...");
         let res = app.run();
         let stream = stream.unwrap();
         handle_connection(stream, res);

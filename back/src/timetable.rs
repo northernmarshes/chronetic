@@ -4,12 +4,12 @@ use ::serde_json;
 use chrono::Timelike;
 use serde::Serialize;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Departures {
     pub departures: Vec<Departure>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Departure {
     pub line: String,
     pub direction: String,
@@ -48,7 +48,6 @@ pub struct Output {
     result: Vec<Vec<KeyValue>>,
 }
 
-// #[derive(Clone)]
 pub struct App {
     pub sorted_timetable: Option<Departures>,
     pub url: String,
@@ -78,25 +77,35 @@ impl App {
     pub fn run(&mut self) -> String {
         // Get json with next seven departures
         self.set_time();
-        let _now = chrono::Local::now();
-        let data = self.get_buses();
-        let mut all: Vec<Departures> = Vec::new();
-        for bus in data {
-            let departures = self.get_departures(bus);
-            all.push(departures);
-        }
-        let mut combined = Departures {
-            departures: all.into_iter().flat_map(|d| d.departures).collect(),
+
+        if self.sorted_timetable.is_some() {
+            println!("Timetable already fetched")
+        } else {
+            println!("Fetching departures...");
+            let data = self.get_buses();
+            let mut all: Vec<Departures> = Vec::new();
+            for bus in data {
+                let departures = self.get_departures(bus);
+                all.push(departures);
+            }
+            let mut combined = Departures {
+                departures: all.into_iter().flat_map(|d| d.departures).collect(),
+            };
+
+            // Sorting next departures
+            combined.departures.sort_by_key(|d| d.mam);
+            let sorted = combined.clone();
+            self.sorted_timetable = Some(sorted);
         };
 
-        // Sorting next departures
-        combined.departures.sort_by_key(|d| d.mam);
-
-        let mut displayed = 0;
+        let mut counter = 0;
         let now = self.time_now;
         let mut departures: Vec<Vec<KeyValue>> = Vec::new();
-        for d in combined.departures {
-            if d.mam > now && displayed <= 6 {
+
+        let sorted = self.sorted_timetable.clone().unwrap();
+
+        for d in sorted.departures {
+            if d.mam > now && counter <= 6 {
                 let left = d.mam - now;
                 let post = vec![
                     KeyValue {
@@ -118,7 +127,7 @@ impl App {
                     },
                 ];
                 departures.push(post);
-                displayed += 1;
+                counter += 1;
             }
         }
 
