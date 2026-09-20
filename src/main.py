@@ -39,6 +39,8 @@ class Chronetic(EPaper):
         utc = 2
 
         self.current_hours = "{:02d}".format(timestamp[3] + utc)
+        if self.current_hours == "24":
+            self.current_hours = "00"
         self.current_minutes = "{:02d}".format(timestamp[4])
         self.now = str(self.current_hours) + ":" + str(self.current_minutes)
         self.departures = []

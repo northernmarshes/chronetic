@@ -51,6 +51,7 @@ name = "back"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "deunicode",
  "reqwest",
  "serde",
  "serde-json-core",
@@ -200,6 +201,12 @@ checksum = "5ca28b0ae3115b884660db4118d803791fd6756b6e88f39c0f3f7859060d7566"
 dependencies = [
  "libc",
 ]
+
+[[package]]
+name = "deunicode"
+version = "1.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "abd57806937c9cc163efc8ea3910e00a62e2aeb0b8119f1793a978088f8f6b04"
 
 [[package]]
 name = "displaydoc"

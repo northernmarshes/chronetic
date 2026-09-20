@@ -2,6 +2,7 @@ use ::reqwest;
 use ::serde::Deserialize;
 use ::serde_json;
 use chrono::{NaiveDate, Timelike};
+use deunicode::deunicode;
 use serde::Serialize;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -161,7 +162,7 @@ impl App {
                     },
                     KeyValue {
                         key: "direction".to_string(),
-                        value: d.direction.to_string(),
+                        value: deunicode(&d.direction.to_string()),
                     },
                     KeyValue {
                         key: "stop".to_string(),
