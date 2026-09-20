@@ -28,12 +28,10 @@ class Chronetic(EPaper):
 
         # Connect wifi and get data
         self.connect_wifi()
-        # self.draw_word("Connected! UwU")
         time.sleep(30)
 
         # Get current time
         ntptime.settime()
-        # self.draw_word("Time is set! C:")
         sleep(10)
 
     def run(self):
