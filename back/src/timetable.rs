@@ -51,7 +51,7 @@ pub struct Output {
 
 pub struct App {
     pub sorted_timetable: Option<Departures>,
-    pub url: String,
+    // pub url: String,
     pub time_now: u16,
     pub last_fetch: Option<NaiveDate>,
     pub output: Option<String>,
@@ -60,14 +60,14 @@ pub struct App {
 
 impl App {
     pub fn new() -> App {
-        let url = format!(
-            "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
-            std::env::var("URL").unwrap(),
-            std::env::var("LIST_ID").unwrap(),
-            std::env::var("STOP_ID").unwrap(),
-            std::env::var("STOP_NR").unwrap(),
-            std::env::var("API_KEY").unwrap(),
-        );
+        // let url = format!(
+        //     "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
+        //     std::env::var("URL").unwrap(),
+        //     std::env::var("LIST_ID").unwrap(),
+        //     std::env::var("STOP_ID").unwrap(),
+        //     std::env::var("STOP_NR").unwrap(),
+        //     std::env::var("API_KEY").unwrap(),
+        // );
         let time_now = 0;
         let today = None;
         let last_fetch = None;
@@ -76,7 +76,7 @@ impl App {
 
         App {
             time_now,
-            url,
+            // url,
             sorted_timetable,
             output,
             today,
@@ -105,11 +105,20 @@ impl App {
         self.output.clone().unwrap()
     }
 
-    pub fn get_buses(&self) -> Vec<String> {
+    pub fn get_buses(&self, stop_id: String, stop_nr: String) -> Vec<String> {
         // Get list of all buses from a bus stop
+        let url = format!(
+            "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
+            std::env::var("URL").unwrap(),
+            std::env::var("LIST_ID").unwrap(),
+            stop_id,
+            stop_nr,
+            std::env::var("API_KEY").unwrap(),
+        );
+
         let mut buses: Vec<String> = Vec::new();
 
-        let body = reqwest::blocking::get(&self.url).unwrap().text().unwrap();
+        let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
         let body = body.as_str();
         let response: Response = serde_json::from_str(body).unwrap();
         for item in &response.result {
@@ -123,12 +132,19 @@ impl App {
     pub fn fetch(&mut self) {
         // Fetch bus departures from API
         println!("Fetching departures...");
-        let data = self.get_buses();
+        let data = self.get_buses("2154".to_string(), "01".to_string());
+        let data_2 = self.get_buses("2140".to_string(), "04".to_string());
         let mut all: Vec<Departures> = Vec::new();
         for bus in data {
-            let departures = self.get_departures(bus);
+            let departures = self.get_departures(bus, "2154".to_string(), "01".to_string());
             all.push(departures);
         }
+
+        for bus in data_2 {
+            let departures = self.get_departures(bus, "2140".to_string(), "04".to_string());
+            all.push(departures);
+        }
+
         let combined = Departures {
             departures: all.into_iter().flat_map(|d| d.departures).collect(),
         };
@@ -213,14 +229,14 @@ impl App {
         self.output = Some(serde_json::to_string(&result).unwrap());
     }
 
-    pub fn get_departures(&self, bus: String) -> Departures {
+    pub fn get_departures(&self, bus: String, stop_id: String, stop_nr: String) -> Departures {
         // Get all departures of a bus
         let url = format!(
             "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
             std::env::var("URL").unwrap(),
             std::env::var("TIMETABLE_ID").unwrap(),
-            std::env::var("STOP_ID").unwrap(),
-            std::env::var("STOP_NR").unwrap(),
+            stop_id,
+            stop_nr,
             bus,
             std::env::var("API_KEY").unwrap(),
         );
