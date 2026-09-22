@@ -49,31 +49,63 @@ pub struct Output {
     result: Vec<Vec<KeyValue>>,
 }
 
+#[derive(Clone)]
+pub struct Stops {
+    pub stops: Vec<BusStop>,
+}
+
+#[derive(Clone)]
+pub struct BusStop {
+    pub id: String,
+    pub nr: String,
+}
+
 pub struct App {
+    pub stops: Stops,
     pub sorted_timetable: Option<Departures>,
     pub time_now: u16,
     pub last_fetch: Option<NaiveDate>,
     pub output: Option<String>,
     pub today: Option<NaiveDate>,
-    pub delay: u16,
+    pub offset: u16,
 }
 
 impl App {
     pub fn new() -> App {
+        // Place the stops you want to fetch here.
+        // Stops' Ids and Numbers can be fount at:
+        // https://www.wtp.waw.pl
+        let stops = Stops {
+            stops: vec![
+                BusStop {
+                    id: "2154".to_string(),
+                    nr: "01".to_string(),
+                },
+                BusStop {
+                    id: "2140".to_string(),
+                    nr: "04".to_string(),
+                },
+            ],
+        };
+        // Set ofset from which you want to desplay
+        // your departures. By default it's set to
+        // display departures 3 minutes from the
+        // present moment.
+        let offset: u16 = 3;
         let time_now = 0;
         let today = None;
         let last_fetch = None;
         let sorted_timetable = None;
         let output = None;
-        let delay: u16 = 3;
 
         App {
+            stops,
             time_now,
             sorted_timetable,
             output,
             today,
             last_fetch,
-            delay,
+            offset,
         }
     }
 
@@ -93,7 +125,27 @@ impl App {
         self.output.clone().unwrap()
     }
 
-    pub fn get_buses(&self, stop_id: String, stop_nr: String) -> Vec<String> {
+    pub fn fetch(&mut self) {
+        // Fetch data from API
+        println!("Fetching departures...");
+        let mut all_buses: Vec<Departures> = Vec::new();
+        for stop in self.stops.stops.clone() {
+            let buses = self.get_buses(&stop.id, &stop.nr);
+            for bus in buses {
+                let departures: Departures =
+                    self.get_departures(bus, stop.id.clone(), stop.nr.clone());
+                all_buses.push(departures);
+            }
+        }
+
+        let combined = Departures {
+            departures: all_buses.into_iter().flat_map(|d| d.departures).collect(),
+        };
+        self.sort(combined);
+        self.last_fetch = Some(chrono::Local::now().date_naive());
+    }
+
+    pub fn get_buses(&self, stop_id: &String, stop_nr: &String) -> Vec<String> {
         // Get list of all buses from a bus stop
         let url = format!(
             "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
@@ -105,7 +157,6 @@ impl App {
         );
 
         let mut buses: Vec<String> = Vec::new();
-
         let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
         let body = body.as_str();
         let response: Response = serde_json::from_str(body).unwrap();
@@ -117,33 +168,8 @@ impl App {
         buses
     }
 
-    pub fn fetch(&mut self) {
-        // Fetch bus departures from API
-        println!("Fetching departures...");
-        let data = self.get_buses("2154".to_string(), "01".to_string());
-        let data_2 = self.get_buses("2140".to_string(), "04".to_string());
-
-        let mut all: Vec<Departures> = Vec::new();
-
-        for bus in data {
-            let departures = self.get_departures(bus, "2154".to_string(), "01".to_string());
-            all.push(departures);
-        }
-
-        for bus in data_2 {
-            let departures = self.get_departures(bus, "2140".to_string(), "04".to_string());
-            all.push(departures);
-        }
-
-        let combined = Departures {
-            departures: all.into_iter().flat_map(|d| d.departures).collect(),
-        };
-        self.sort(combined);
-        self.last_fetch = Some(chrono::Local::now().date_naive());
-    }
-
     pub fn sort(&mut self, mut combined: Departures) {
-        // Sort departures
+        // Sort all combined departures by departure time
         combined.departures.sort_by_key(|d| d.mam);
         let sorted = combined.clone();
         self.sorted_timetable = Some(sorted);
@@ -174,10 +200,10 @@ impl App {
     }
 
     pub fn prepare_output(&mut self, sorted: Departures) {
-        // Prepare json with 7 next departures
-
+        // Prepare a json with 7 next departures
+        // to display on the screen.
         let mut counter = 0;
-        let now = self.time_now + self.delay;
+        let now = self.time_now + self.offset;
         let mut departures: Vec<Vec<KeyValue>> = Vec::new();
         for d in sorted.departures.clone() {
             if d.mam > now && counter <= 6 {
@@ -187,7 +213,8 @@ impl App {
             }
         }
 
-        // Add departures after midnight
+        // If there are not enough departures left today
+        // add first departures after midnight.
         if departures.len() < 6 {
             for d in sorted.departures.clone() {
                 if departures.len() < 6 {
@@ -202,7 +229,7 @@ impl App {
     }
 
     pub fn get_departures(&self, bus: String, stop_id: String, stop_nr: String) -> Departures {
-        // Get all departures of a bus
+        // Get all departures of a single bus.
         let url = format!(
             "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
             std::env::var("URL").unwrap(),
@@ -243,7 +270,7 @@ impl App {
     }
 
     pub fn time_to_mam(&self, timestamp: &str) -> u16 {
-        // Convert time to minutes after midnight
+        // Convert formated time to minutes after midnight.
         let time: Vec<&str> = timestamp.split(":").collect();
         let hours: u16 = time[0].parse().unwrap_or(0);
         let minutes = time[1].parse().unwrap_or(0);
@@ -251,7 +278,7 @@ impl App {
     }
 
     pub fn mam_to_time(&self, mam: u16) -> String {
-        // Convert minutes after midnight to time
+        // Convert minutes after midnight to formated time
         let mut hours = 0;
         let minutes: u16;
         if mam > 60 {
