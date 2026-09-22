@@ -1,5 +1,6 @@
 import pytest
-from fetch_data.main import fetch_test
+import secrets
+from fetch_data.fetch_test import fetch_test
 
 
 url = secrets.URL

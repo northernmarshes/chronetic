@@ -89,11 +89,13 @@ impl App {
                 },
             ],
         };
+
         // Set offset from which you want to display
         // your departures. By default it's set to
         // display departures 3 minutes from the
         // present moment.
         let offset: u16 = 3;
+
         let time_now = 0;
         let today = None;
         let last_fetch = None;
@@ -228,7 +230,7 @@ impl App {
         // If there are not enough departures left today
         // add first departures after midnight.
         let mut lack = 0;
-        if departures.len() < 6 {
+        if departures.len() < 7 {
             lack = 7 - departures.len();
         }
         let mut counter = 0;
@@ -310,12 +312,14 @@ impl App {
     pub fn set_time(&mut self) {
         // Set time
         let now = chrono::Local::now();
-        let hours: u16 = now.hour() as u16;
         let date = now.date_naive();
+        let hours: u16 = now.hour() as u16;
         let minutes: u16 = now.minute() as u16;
+
         // Test right before midnight
         // let hours = 23;
-        // let minutes = 40;
+        // let minutes = 20;
+
         let mam: u16 = hours * 60 + minutes;
         self.today = Some(date);
         self.time_now = mam;
