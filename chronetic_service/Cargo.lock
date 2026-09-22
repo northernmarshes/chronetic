@@ -47,18 +47,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "back"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "deunicode",
- "reqwest",
- "serde",
- "serde-json-core",
- "serde_json",
-]
-
-[[package]]
 name = "base64"
 version = "0.22.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -127,6 +115,18 @@ dependencies = [
  "cfg-if",
  "cpufeatures",
  "rand_core",
+]
+
+[[package]]
+name = "chronetic_service"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "deunicode",
+ "reqwest",
+ "serde",
+ "serde-json-core",
+ "serde_json",
 ]
 
 [[package]]

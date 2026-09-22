@@ -51,36 +51,29 @@ pub struct Output {
 
 pub struct App {
     pub sorted_timetable: Option<Departures>,
-    // pub url: String,
     pub time_now: u16,
     pub last_fetch: Option<NaiveDate>,
     pub output: Option<String>,
     pub today: Option<NaiveDate>,
+    pub delay: u16,
 }
 
 impl App {
     pub fn new() -> App {
-        // let url = format!(
-        //     "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
-        //     std::env::var("URL").unwrap(),
-        //     std::env::var("LIST_ID").unwrap(),
-        //     std::env::var("STOP_ID").unwrap(),
-        //     std::env::var("STOP_NR").unwrap(),
-        //     std::env::var("API_KEY").unwrap(),
-        // );
         let time_now = 0;
         let today = None;
         let last_fetch = None;
         let sorted_timetable = None;
         let output = None;
+        let delay: u16 = 3;
 
         App {
             time_now,
-            // url,
             sorted_timetable,
             output,
             today,
             last_fetch,
+            delay,
         }
     }
 
@@ -95,11 +88,6 @@ impl App {
         };
 
         let sorted = self.sorted_timetable.clone().unwrap();
-
-        // Print all sorted list
-        // for d in &sorted.departures {
-        //     println!("{:?}", d);
-        // }
 
         self.prepare_output(sorted);
         self.output.clone().unwrap()
@@ -134,7 +122,9 @@ impl App {
         println!("Fetching departures...");
         let data = self.get_buses("2154".to_string(), "01".to_string());
         let data_2 = self.get_buses("2140".to_string(), "04".to_string());
+
         let mut all: Vec<Departures> = Vec::new();
+
         for bus in data {
             let departures = self.get_departures(bus, "2154".to_string(), "01".to_string());
             all.push(departures);
@@ -159,71 +149,53 @@ impl App {
         self.sorted_timetable = Some(sorted);
     }
 
+    pub fn make_post(&self, departure: Departure) -> Vec<KeyValue> {
+        // Prepare a single departure to display
+        let left = departure.mam - self.time_now;
+        let post = vec![
+            KeyValue {
+                key: "time".to_string(),
+                value: self.mam_to_time(departure.mam).to_string(),
+            },
+            KeyValue {
+                key: "number".to_string(),
+                value: departure.line.to_string(),
+            },
+            KeyValue {
+                key: "direction".to_string(),
+                value: deunicode(&departure.direction.to_string()),
+            },
+            KeyValue {
+                key: "stop".to_string(),
+                value: left.to_string(),
+            },
+        ];
+        post
+    }
+
     pub fn prepare_output(&mut self, sorted: Departures) {
         // Prepare json with 7 next departures
+
         let mut counter = 0;
-        let now = self.time_now;
+        let now = self.time_now + self.delay;
         let mut departures: Vec<Vec<KeyValue>> = Vec::new();
         for d in sorted.departures.clone() {
             if d.mam > now && counter <= 6 {
-                let left = d.mam - now;
-                let post = vec![
-                    KeyValue {
-                        key: "time".to_string(),
-                        value: self.mam_to_time(d.mam).to_string(),
-                    },
-                    KeyValue {
-                        key: "number".to_string(),
-                        value: d.line.to_string(),
-                    },
-                    KeyValue {
-                        key: "direction".to_string(),
-                        value: deunicode(&d.direction.to_string()),
-                    },
-                    KeyValue {
-                        key: "stop".to_string(),
-                        value: left.to_string(),
-                        // value: "Stacja".to_string(),
-                    },
-                ];
+                let post = self.make_post(d);
                 departures.push(post);
                 counter += 1;
             }
         }
 
-        //TODO: add departures after midnight if output is shorter then 7
-        // if departures.len() < 6 {
-        //     let lack = 7 - departures.len();
-        //     println!("Brakuje: {}", lack);
-        //     let mut counter = 0;
-        //     for d in sorted.departures.clone() {
-        //         if counter <= (lack - 1) {
-        //             println!("dodaje {:?}", d);
-        //             let left = d.mam - now;
-        //             let post = vec![
-        //                 KeyValue {
-        //                     key: "time".to_string(),
-        //                     value: self.mam_to_time(d.mam).to_string(),
-        //                 },
-        //                 KeyValue {
-        //                     key: "number".to_string(),
-        //                     value: d.line.to_string(),
-        //                 },
-        //                 KeyValue {
-        //                     key: "direction".to_string(),
-        //                     value: d.direction.to_string(),
-        //                 },
-        //                 KeyValue {
-        //                     key: "stop".to_string(),
-        //                     value: left.to_string(),
-        //                     // value: "Stacja".to_string(),
-        //                 },
-        //             ];
-        //             departures.push(post);
-        //             counter += 1;
-        //         }
-        //     }
-        // }
+        // Add departures after midnight
+        if departures.len() < 6 {
+            for d in sorted.departures.clone() {
+                if departures.len() < 6 {
+                    let post = self.make_post(d);
+                    departures.push(post);
+                }
+            }
+        }
 
         let result = Output { result: departures };
         self.output = Some(serde_json::to_string(&result).unwrap());

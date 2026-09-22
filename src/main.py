@@ -19,7 +19,7 @@ def main():
     app = Chronetic()
     while 1:
         app.run()
-        time.sleep(30)
+        time.sleep(60)
 
 
 class Chronetic(EPaper):
@@ -27,12 +27,18 @@ class Chronetic(EPaper):
         super().__init__()
 
         # Connect wifi and get data
+        print("Connecting to network...")
         self.connect_wifi()
-        time.sleep(30)
+        for i in range(10, 0, -1):
+            time.sleep(1)
+            print(i)
 
         # Get current time
+        print("Setting time...")
         ntptime.settime()
-        sleep(10)
+        for i in range(10, 0, -1):
+            time.sleep(1)
+            print(i)
 
     def run(self):
         now = time.time() + 7200
@@ -54,7 +60,7 @@ class Chronetic(EPaper):
         # Display UI
         self.draw_timetable()
 
-        print("sleep()")
+        print("Done! Get on your bus!")
         self.epd.sleep()
 
     def get_data(self):
@@ -66,7 +72,6 @@ class Chronetic(EPaper):
                 r = requests.get(URI)
             except:
                 pass
-        # time.sleep(20)
         dump = json.dumps(r.json())
         data = json.loads(dump)
         count = 0
@@ -94,7 +99,7 @@ class Chronetic(EPaper):
 
     def draw_timetable(self):
         # Initialize epd
-        print("init_4gray()")
+        print("Initializing display...")
         self.epd.init_4gray()
         # Create image buffers
         gray = bytearray(EPD_WIDTH_BYTES * EPD_HEIGHT)
@@ -168,11 +173,10 @@ class Chronetic(EPaper):
         wlan = network.WLAN()
         wlan.active(True)
         if not wlan.isconnected():
-            print("connecting to network...")
             wlan.connect(SSID, KEY)
             while not wlan.isconnected():
                 machine.idle()
-        print("network config:", wlan.ipconfig("addr4"))
+        print("Network configuration:", wlan.ipconfig("addr4"))
 
     def draw_error(self):
         # Initialize epd

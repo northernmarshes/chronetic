@@ -22,7 +22,7 @@ check_and_copy() {
   fi
 }
 
-# Process all Python files in front directory
+# Process all Python files in src directory
 for file in main.py draw_utils.py font8x8.py epaper.py secrets.py; do
   if [ -f "src/$file" ]; then
     check_and_copy "src/$file"
