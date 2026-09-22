@@ -89,7 +89,7 @@ impl App {
                 },
             ],
         };
-        // Set ofset from which you want to desplay
+        // Set offset from which you want to display
         // your departures. By default it's set to
         // display departures 3 minutes from the
         // present moment.
@@ -179,7 +179,17 @@ impl App {
 
     pub fn make_post(&self, departure: Departure) -> Vec<KeyValue> {
         // Prepare a single departure to display
-        let left = departure.mam - self.time_now;
+
+        // Calculate time left till departure depanding
+        // if it's before or after midnight.
+        let mut left = 0;
+        if departure.mam >= self.time_now {
+            left = departure.mam - self.time_now;
+        } else if departure.mam < self.time_now {
+            left = departure.mam + 1440 - self.time_now;
+        }
+
+        // Create a departure
         let post = vec![
             KeyValue {
                 key: "time".to_string(),
@@ -217,12 +227,16 @@ impl App {
 
         // If there are not enough departures left today
         // add first departures after midnight.
+        let mut lack = 0;
         if departures.len() < 6 {
-            for d in sorted.departures.clone() {
-                if departures.len() < 6 {
-                    let post = self.make_post(d);
-                    departures.push(post);
-                }
+            lack = 7 - departures.len();
+        }
+        let mut counter = 0;
+        for d in sorted.departures.clone() {
+            if counter < lack {
+                let post = self.make_post(d);
+                departures.push(post);
+                counter += 1;
             }
         }
 
@@ -299,6 +313,9 @@ impl App {
         let hours: u16 = now.hour() as u16;
         let date = now.date_naive();
         let minutes: u16 = now.minute() as u16;
+        // Test right before midnight
+        // let hours = 23;
+        // let minutes = 40;
         let mam: u16 = hours * 60 + minutes;
         self.today = Some(date);
         self.time_now = mam;
