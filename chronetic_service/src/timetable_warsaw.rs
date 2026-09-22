@@ -77,13 +77,15 @@ impl App {
         // https://www.wtp.waw.pl
         let stops = Stops {
             stops: vec![
+                // Dzielna 02
                 BusStop {
-                    id: "2154".to_string(),
-                    nr: "01".to_string(),
+                    id: "5085".to_string(),
+                    nr: "02".to_string(),
                 },
+                // Esperanto 01
                 BusStop {
-                    id: "2140".to_string(),
-                    nr: "04".to_string(),
+                    id: "5175".to_string(),
+                    nr: "01".to_string(),
                 },
             ],
         };
@@ -192,7 +194,7 @@ impl App {
                 value: deunicode(&departure.direction.to_string()),
             },
             KeyValue {
-                key: "stop".to_string(),
+                key: "to_go".to_string(),
                 value: left.to_string(),
             },
         ];
@@ -303,17 +305,18 @@ impl App {
     }
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//
-//     #[test]
-//     fn fetching_works() {
-//         assert_eq!();
-//     }
-//
-//     #[test]
-//     fn output_count() {
-//         assert_eq!();
-//     }
-// }
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn output_count() {
+        // Check if the length of the response equals 7
+        // Important especially before midnight
+        let mut app = App::new();
+        let output = app.run();
+        let response: Timetable = serde_json::from_str(&output).unwrap();
+        let length = response.result.len();
+        assert_eq!(length, 7);
+    }
+}

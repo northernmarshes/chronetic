@@ -1,5 +1,9 @@
 # Chronetic
 
+## Keys
+
+To use Chronetic you need to obtain API key. You can register for free at <https://api.um.warszawa.pl/>
+
 ## Hardware components
 
 - E-paper E-Ink 4,2'' 400x300px SPI - Waveshare 13353

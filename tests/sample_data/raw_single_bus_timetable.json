@@ -1,0 +1,2188 @@
+    {
+      "result": [
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "12:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "1"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "11:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "10:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "11:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "011"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "16:28:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "7"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "13:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "012"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "06:41:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "1"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "05:39:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "17:02:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "19:04:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "17:50:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "4"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "12:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "7"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "15:07:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "013"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "17:26:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "012"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "08:36:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "011"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "22:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "21:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "08:56:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "7"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "11:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "Tx-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "23:39:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "4"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "08:26:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "011"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "18:38:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "08:06:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "Tx-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "22:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "013"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "15:17:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "1"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "15:38:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "15:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "14:37:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "4"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "Tx-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "18:26:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "14:57:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "7"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "09:06:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "4"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "16:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "09"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "16:08:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "05:09:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "15:28:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "4"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "10:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "011"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "14:27:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "11:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "21:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "09"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "Tx-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "07:58:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "07:51:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "16:38:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "09"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "Tx-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "22:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "19:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "07:22:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "20:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "09:19:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "4"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "14:17:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "013"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "07:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "07:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "7"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "19:19:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "14:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "10:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "20:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "21:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "012"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "14:47:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "18:02:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "1"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "07:44:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "Tx-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "23:09:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "08:46:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "21:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "12:03:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "4"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "06:26:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "22:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "17:38:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "1"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "09:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "1"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "13:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "12:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "13:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "7"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "17:14:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "09"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "20:18:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "09"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "18:14:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "012"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "16:49:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "15:58:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "010"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "Tx-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "08:16:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "06:53:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "011"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "20:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "6"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "10:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "7"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "07:12:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "09:48:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "5"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "18:50:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "3"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "06:09:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "8"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "19:33:00"
+          }
+        ],
+        [
+          {
+            "key": "symbol_2",
+            "value": null
+          },
+          {
+            "key": "symbol_1",
+            "value": null
+          },
+          {
+            "key": "brygada",
+            "value": "2"
+          },
+          {
+            "key": "kierunek",
+            "value": "Esperanto"
+          },
+          {
+            "key": "trasa",
+            "value": "TP-ESP"
+          },
+          {
+            "key": "czas",
+            "value": "13:48:00"
+          }
+        ]
+      ]
+    }

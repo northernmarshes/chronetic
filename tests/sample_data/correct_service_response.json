@@ -1,0 +1,130 @@
+{
+  "result": [
+    [
+      {
+        "key": "time",
+        "value": "15:55:00"
+      },
+      {
+        "key": "number",
+        "value": "1"
+      },
+      {
+        "key": "direction",
+        "value": "Annopol"
+      },
+      {
+        "key": "to_go",
+        "value": "6"
+      }
+    ],
+    [
+      {
+        "key": "time",
+        "value": "15:55:00"
+      },
+      {
+        "key": "number",
+        "value": "27"
+      },
+      {
+        "key": "direction",
+        "value": "Metro Marymont"
+      },
+      {
+        "key": "to_go",
+        "value": "6"
+      }
+    ],
+    [
+      {
+        "key": "time",
+        "value": "15:58:00"
+      },
+      {
+        "key": "number",
+        "value": "22"
+      },
+      {
+        "key": "direction",
+        "value": "Piaski"
+      },
+      {
+        "key": "to_go",
+        "value": "9"
+      }
+    ],
+    [
+      {
+        "key": "time",
+        "value": "15:58:00"
+      },
+      {
+        "key": "number",
+        "value": "743"
+      },
+      {
+        "key": "direction",
+        "value": "Os. Gorczewska"
+      },
+      {
+        "key": "to_go",
+        "value": "9"
+      }
+    ],
+    [
+      {
+        "key": "time",
+        "value": "15:59:00"
+      },
+      {
+        "key": "number",
+        "value": "1"
+      },
+      {
+        "key": "direction",
+        "value": "Zeran Wschodni"
+      },
+      {
+        "key": "to_go",
+        "value": "10"
+      }
+    ],
+    [
+      {
+        "key": "time",
+        "value": "16:03:00"
+      },
+      {
+        "key": "number",
+        "value": "1"
+      },
+      {
+        "key": "direction",
+        "value": "Annopol"
+      },
+      {
+        "key": "to_go",
+        "value": "14"
+      }
+    ],
+    [
+      {
+        "key": "time",
+        "value": "16:03:00"
+      },
+      {
+        "key": "number",
+        "value": "27"
+      },
+      {
+        "key": "direction",
+        "value": "Metro Marymont"
+      },
+      {
+        "key": "to_go",
+        "value": "14"
+      }
+    ]
+  ]
+}

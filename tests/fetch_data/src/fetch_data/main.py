@@ -1,24 +1,31 @@
-import secrets
 import json
 import requests
-import pytest
 import time
+import secrets
 
-URI = secrets.URI
+
+service_url = secrets.URL
 
 
-def fetch_test() -> list:
+def fetch_test(url) -> list:
     departures: list = []
     r = None
     while r is None:
         try:
-            r = requests.get(URI)
+            r = requests.get(url)
         except:
             print("Fetching failed, trying again...")
             time.sleep(2)
 
     dump = json.dumps(r.json())
+
     data = json.loads(dump)
+
+    # Save response to file
+    # json_str = json.dumps(data, indent=4)
+    # with open("response.json", "w") as f:
+    #     f.write(json_str)
+
     count = 0
     for result in data["result"]:
         if count < 7:
@@ -44,12 +51,7 @@ def fetch_test() -> list:
     return departures
 
 
-departures = fetch_test()
-# print("Response length is: ", len(fetch_test()))
+departures = fetch_test(service_url)
+print("Response length is: ", len(fetch_test(service_url)))
 for departure in departures:
     print(departure)
-
-
-# class TestClass:
-#     def test_length(self):
-#         assert len(fetch_test()) == 7

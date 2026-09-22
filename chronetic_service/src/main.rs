@@ -1,7 +1,7 @@
-use crate::timetable::App;
+use crate::timetable_warsaw::App;
 use std::io::{BufReader, prelude::*};
 use std::net::{TcpListener, TcpStream};
-mod timetable;
+mod timetable_warsaw;
 
 const IP: &str = env!("IP");
 
