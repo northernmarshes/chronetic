@@ -3,7 +3,7 @@
 An e-Ink public transport timetable. The software is composed of MicroPython code for ESP32 and a Rust service.
 The service is written to parse data from the Warsaw's public transport API.
 
-The device connects to the service and downloads a JSON file with 7 next departures counting from now with 3 minutes offset. Service fetches timetable data from API once a day or upon restart.
+The device connects to the service and downloads a JSON file with 7 upcoming departures counting from now with a 3 minutes offset. Service fetches timetable data from API once a day or upon restart.
 
 ![Photo](pics/crntc_bare.jpg)
 
