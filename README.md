@@ -1,13 +1,15 @@
 # Chronetic
 
-An e-ink public transport timetable. The software is composed of a micropython frontend and a rust microservice.<br>
-The service is written to parse the Warsaw's Public Transport API. If you want to add parsing logic for other cities feel free to open a pull request.
+An e-Ink public transport timetable.The software is composed of MicroPython code for ESP32 and a Rust service.
+The service is written to parse data from the Warsaw's public transport API.
+
+The device connects to the service and downloads a JSON file with 7 next departures counting from now with 3 minutes offset. Service fetches timetable data from API once a day or upon the restart.
 
 ## Assembly and installation
 
-### 1. Assembling hardware
+### 1. Assembling the hardware
 
-#### 1.1 Connect the components according to the pinout
+- Connect the components according to the pinout
 
 ##### Components
 
@@ -38,26 +40,25 @@ The service is written to parse the Warsaw's Public Transport API. If you want t
                         └───────────────────────┘
 ```
 
-### 2. Setting up the service (for Warsaw's Public Transport API)
+### 2. Setting up the service (Warsaw's public transport API)
 
 #### 2.1 Get the credentials
 
 - API key
 
 ```
-To obtain API key you need to register for free at <https://api.um.warszawa.pl/>
+To obtain API key you need to register for free at https://api.um.warszawa.pl
 ```
 
-- List ID
+- Url, List ID, Timetable ID
 
 ```
-???
-```
+Available at https://api.um.warszawa.pl/ under:
 
-- Timetable ID
-
-```
-???
+dostępne dane -> transport miejski -> linie
+dostępne dane -> transport miejski -> linie -> dokumentacja
+dostępne dane -> transport miejski -> przystanki
+dostępne dane -> transport miejski -> linie -> dokumentacja
 ```
 
 - IP
@@ -66,7 +67,7 @@ To obtain API key you need to register for free at <https://api.um.warszawa.pl/>
 Your subnet IP with a chosen port (eg. 192.168.1.0:7878)
 ```
 
-- Your WIFI SSID & password
+- Wi-Fi SSID & password
 
 ```
 Your network name and password
@@ -75,12 +76,12 @@ Your network name and password
 - Bus stop ID & number
 
 ```
- Stops' IDs and numbers can be found at <https://www.wtp.waw.pl>
+ Stops' IDs and numbers can be found at https://www.wtp.waw.pl
 ```
 
 #### 2.2 Fill the credentials
 
-Fill the variables in the following files:
+- Fill the variables in the following files:
 
 ```
 chronetic/chronetic_service/.cargo/config.toml
@@ -89,28 +90,34 @@ chronetic/src/secrets.py
 
 #### 2.3 Run the service
 
-- Install Rust if needed
+- If you do not have Rust installed follow the [instructions](https://rust-lang.org/tools/install/).
 - Test the service
 
 ```
+cd chronetic/chronetic_service
 cargo test
 ```
 
 - Run the service
 
 ```
+cd chronetic/chronetic_service
 cargo run --release
 ```
 
-### 3. Flashing the esp32
+#### 2.3 Run the app as a service
 
-#### 3.1 Connecting microcontroller
+- Configure a background service using systemd or else
 
-Make sure esp32 is visible and connected and flashed with micropython.
+### 3. Flash the device
+
+#### 3.1 Connect the device
+
+- Make sure device is visible, connected and flashed with micropython
 
 #### 3.2 Flash it
 
-Run the bash script to flash and run the app:
+- Run the bash script to flash the device and run the app:
 
 ```
 cd chronetic
