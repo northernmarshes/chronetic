@@ -1,3 +1,5 @@
+use std::env;
+
 use ::reqwest;
 use ::serde::Deserialize;
 use ::serde_json;
@@ -151,13 +153,13 @@ impl App {
 
     pub fn get_buses(&self, stop_id: &String, stop_nr: &String) -> Vec<String> {
         // Get list of all buses from a bus stop
+        let base: &str = env!("URL");
+        let list_id: &str = env!("LIST_ID");
+        let api_key: &str = env!("API_KEY");
+
         let url = format!(
             "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
-            std::env::var("URL").unwrap(),
-            std::env::var("LIST_ID").unwrap(),
-            stop_id,
-            stop_nr,
-            std::env::var("API_KEY").unwrap(),
+            base, list_id, stop_id, stop_nr, api_key,
         );
 
         let mut buses: Vec<String> = Vec::new();
@@ -248,14 +250,13 @@ impl App {
 
     pub fn get_departures(&self, bus: String, stop_id: String, stop_nr: String) -> Departures {
         // Get all departures of a single bus.
+        let base: &str = env!("URL");
+        let timetable_id: &str = env!("TIMETABLE_ID");
+        let api_key: &str = env!("API_KEY");
+
         let url = format!(
             "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
-            std::env::var("URL").unwrap(),
-            std::env::var("TIMETABLE_ID").unwrap(),
-            stop_id,
-            stop_nr,
-            bus,
-            std::env::var("API_KEY").unwrap(),
+            base, timetable_id, stop_id, stop_nr, bus, api_key,
         );
         let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
         let body = body.as_str();
