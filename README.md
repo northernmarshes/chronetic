@@ -5,6 +5,8 @@ The service is written to parse data from the Warsaw's public transport API.
 
 The device connects to the service and downloads a JSON file with 7 next departures counting from now with 3 minutes offset. Service fetches timetable data from API once a day or upon the restart.
 
+![Photo](pics/crntc_bare.jpg)
+
 ## Assembly and installation
 
 ### 1. Assembling the hardware
@@ -21,24 +23,36 @@ The device connects to the service and downloads a JSON file with 7 next departu
 ```
                         ┌───────────────────────┐
                         │    ╔═════════════╗    │
-                 EN   ──┤    ║             ║    ├──   D23               
+                 EN   ──┤    ║             ║    ├──   D23 --- DIN       
                  VP   ──┤    ║ ┌────────┐  ║    ├──   D22                
                  VN   ──┤    ║ │ ESP-32 │  ║    ├──   TXO
                 D34   ──┤    ║ │        │  ║    ├──   RXO
                 D35   ──┤    ║ └────────┘  ║    ├──   D21
                 D32   ──┤    ║             ║    ├──   D19
-                D33   ──┤    ║             ║    ├──   D18               
+                D33   ──┤    ║             ║    ├──   D18  --- CLK       
                 D25   ──┤    ║             ║    ├──   D5
                 D26   ──┤    ║             ║    ├──   TX2              
-                D27   ──┤    ║             ║    ├──   RX2               
-                D14   ──┤    ║             ║    ├──   D4
-                D12   ──┤    ║             ║    ├──   D2
-                D13   ──┤    ║    ┌───┐    ║    ├──   D15
-                GND   ──┤    ║    │   │    ║    ├──   GND               
-                 VN   ──┤    ║    └───┘    ║    ├──   3V3               
+   CS   ---     D27   ──┤    ║             ║    ├──   RX2               
+   DC   ---     D14   ──┤    ║             ║    ├──   D4
+   RST  ---     D12   ──┤    ║             ║    ├──   D2
+   BUSY ---     D13   ──┤    ║    ┌───┐    ║    ├──   D15
+   GND  ---     GND   ──┤    ║    │   │    ║    ├──   GND               
+                 VN   ──┤    ║    └───┘    ║    ├──   3V3  --- VCC      
                         │    ╚═════USB═════╝    │
                         └───────────────────────┘
+
 ```
+
+| e-Paper | Function | ESP32 GPIO |
+|------------|----------|------------|
+| BUSY | Busy state output | GPIO13 |
+| RST | Reset signal input | GPIO12 |
+| DC | Data/Command control | GPIO14 |
+| CS | Chip select | GPIO27 |
+| CLK | Serial clock input | GPIO18 |
+| DIN | Serial data input | GPIO23 |
+| GND | Ground | GND |
+| VCC | Power supply (3.3V) | 3.3V |
 
 ### 2. Setting up the service (Warsaw's public transport API)
 
