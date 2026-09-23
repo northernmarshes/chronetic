@@ -1,9 +1,9 @@
 # Chronetic
 
-An e-Ink public transport timetable.The software is composed of MicroPython code for ESP32 and a Rust service.
+An e-Ink public transport timetable. The software is composed of MicroPython code for ESP32 and a Rust service.
 The service is written to parse data from the Warsaw's public transport API.
 
-The device connects to the service and downloads a JSON file with 7 next departures counting from now with 3 minutes offset. Service fetches timetable data from API once a day or upon the restart.
+The device connects to the service and downloads a JSON file with 7 next departures counting from now with 3 minutes offset. Service fetches timetable data from API once a day or upon restart.
 
 ![Photo](pics/crntc_bare.jpg)
 
@@ -64,7 +64,7 @@ The device connects to the service and downloads a JSON file with 7 next departu
 To obtain API key you need to register for free at https://api.um.warszawa.pl
 ```
 
-- Url, List ID, Timetable ID
+- URL, List ID, Timetable ID
 
 ```
 Available at https://api.um.warszawa.pl/ under:
@@ -90,7 +90,8 @@ Your network name and password
 - Bus stop ID & number
 
 ```
- Stops' IDs and numbers can be found at https://www.wtp.waw.pl
+Stops' IDs and numbers can be found at https://www.wtp.waw.pl
+You can track one or more stops
 ```
 
 #### 2.2 Fill the credentials
@@ -100,6 +101,7 @@ Your network name and password
 ```
 chronetic/chronetic_service/.cargo/config.toml
 chronetic/src/secrets.py
+chronetic/chronetic_service/timetable_warsaw.rs (stops variable)
 ```
 
 #### 2.3 Run the service
@@ -119,7 +121,7 @@ cd chronetic/chronetic_service
 cargo run --release
 ```
 
-#### 2.3 Run the app as a service
+#### 2.4 Run the app as a service
 
 - Configure a background service using systemd or else
 
@@ -127,13 +129,17 @@ cargo run --release
 
 #### 3.1 Connect the device
 
-- Make sure device is visible, connected and flashed with micropython
+- Make sure device is visible, connected and flashed with MicroPython
 
 #### 3.2 Flash it
 
-- Run the bash script to flash the device and run the app:
+- Run the bash script to flash the device and start the app:
 
 ```
 cd chronetic
 ./deploy_esp32
 ```
+
+## Disclaimer
+
+Coded by a human - all bugs carefully crafted by hand.

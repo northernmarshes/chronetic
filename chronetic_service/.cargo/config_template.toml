@@ -1,0 +1,8 @@
+[env]
+IP = ""
+SSID = ""
+PASSWORD = ""
+URL = ""
+API_KEY = ""
+LIST_ID = ""
+TIMETABLE_ID = ""
