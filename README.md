@@ -72,7 +72,7 @@ Available at https://api.um.warszawa.pl/ under:
 dostępne dane -> transport miejski -> linie
 dostępne dane -> transport miejski -> linie -> dokumentacja
 dostępne dane -> transport miejski -> przystanki
-dostępne dane -> transport miejski -> linie -> dokumentacja
+dostępne dane -> transport miejski -> przystanki -> dokumentacja
 ```
 
 - IP
