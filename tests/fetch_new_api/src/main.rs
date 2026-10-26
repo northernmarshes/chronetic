@@ -35,6 +35,6 @@ fn fetch_departures(key: &str) -> Result<(), Box<dyn std::error::Error>> {
         .body("{\"busstopId\": \"5070\", \"busstopNr\": \"03\", \"line\": \"20\"}")
         .send()?
         .text()?;
-    println!("{:?}", res);
+    println!("{}", res);
     Ok(())
 }

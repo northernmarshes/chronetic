@@ -1,11 +1,11 @@
-use std::env;
-
 use ::reqwest;
+use ::reqwest::header;
 use ::serde::Deserialize;
 use ::serde_json;
 use chrono::{NaiveDate, Timelike};
 use deunicode::deunicode;
 use serde::Serialize;
+use std::env;
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct Departures {
@@ -131,6 +131,59 @@ impl App {
         self.output.clone().unwrap()
     }
 
+    pub fn new_fetch_lines(
+        &self,
+        key: &str,
+        stop_id: &String,
+        stop_nr: &String,
+    ) -> Result<String, Box<dyn std::error::Error>> {
+        let mut headers = header::HeaderMap::new();
+        headers.insert("Authorization", key.parse().unwrap());
+        headers.insert("Content-Type", "application/json".parse().unwrap());
+        let body = format!(
+            "{{\"busstopId\": \"{}\", \"busstopNr\": \"{}\" }}",
+            stop_id, stop_nr,
+        );
+
+        let client = reqwest::blocking::Client::new();
+        let res = client
+            .post("https://dane.um.warszawa.pl/api/action/get_ztm_lista_linii_na_przystanku")
+            .headers(headers)
+            .body(body)
+            .send()?
+            .text()?;
+        println!("lines: {}", res);
+        Ok(res)
+    }
+
+    pub fn new_fetch_departures(
+        &self,
+        key: &str,
+        stop_id: &String,
+        stop_nr: &String,
+        bus: &String,
+    ) -> Result<String, Box<dyn std::error::Error>> {
+        let mut headers = header::HeaderMap::new();
+        headers.insert("Authorization", key.parse().unwrap());
+        headers.insert("Content-Type", "application/json".parse().unwrap());
+
+        let body = format!(
+            "{{\"busstopId\": \"{}\", \"busstopNr\": \"{}\", \"line\": \"{}\"}}",
+            stop_id, stop_nr, bus
+        );
+
+        let client = reqwest::blocking::Client::new();
+        let res = client
+            .post("https://dane.um.warszawa.pl/api/action/get_ztm_odjazdy_linii_z_przystanku")
+            .headers(headers)
+            .body(body)
+            .send()?
+            .text()?;
+
+        println!("departures: {}", res);
+        Ok(res)
+    }
+
     pub fn fetch(&mut self) {
         // Fetch data from API
         println!("Fetching departures...");
@@ -153,17 +206,19 @@ impl App {
 
     pub fn get_buses(&self, stop_id: &String, stop_nr: &String) -> Vec<String> {
         // Get list of all buses from a bus stop
-        let base: &str = env!("URL");
-        let list_id: &str = env!("LIST_ID");
+        // let base: &str = env!("URL");
+        // let list_id: &str = env!("LIST_ID");
+        // let api_key: &str = env!("API_KEY");
+        //
+        // let url = format!(
+        //     "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
+        //     base, list_id, stop_id, stop_nr, api_key,
+        // );
+
         let api_key: &str = env!("API_KEY");
-
-        let url = format!(
-            "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
-            base, list_id, stop_id, stop_nr, api_key,
-        );
-
         let mut buses: Vec<String> = Vec::new();
-        let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
+        // let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
+        let body = self.new_fetch_lines(api_key, stop_id, stop_nr).unwrap();
         let body = body.as_str();
         let response: Response = serde_json::from_str(body).unwrap();
         for item in &response.result {
@@ -250,15 +305,19 @@ impl App {
 
     pub fn get_departures(&self, bus: String, stop_id: String, stop_nr: String) -> Departures {
         // Get all departures of a single bus.
-        let base: &str = env!("URL");
-        let timetable_id: &str = env!("TIMETABLE_ID");
+        // let base: &str = env!("URL");
+        // let timetable_id: &str = env!("TIMETABLE_ID");
         let api_key: &str = env!("API_KEY");
+        //
+        // let url = format!(
+        //     "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
+        //     base, timetable_id, stop_id, stop_nr, bus, api_key,
+        // );
+        // let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
 
-        let url = format!(
-            "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
-            base, timetable_id, stop_id, stop_nr, bus, api_key,
-        );
-        let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
+        let body = self
+            .new_fetch_departures(api_key, &stop_id, &stop_nr, &bus)
+            .unwrap();
         let body = body.as_str();
         let timetable: Timetable = serde_json::from_str(body).unwrap();
 
