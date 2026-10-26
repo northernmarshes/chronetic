@@ -19,10 +19,7 @@ pub struct Departure {
     pub mam: u16,
 }
 
-#[derive(Deserialize, Debug)]
-pub struct Response {
-    pub result: Vec<Item>,
-}
+pub type Response = Vec<Item>;
 
 #[derive(Deserialize, Debug)]
 pub struct Item {
@@ -35,10 +32,7 @@ pub struct KeyValue {
     pub value: String,
 }
 
-#[derive(Deserialize, Debug)]
-pub struct Timetable {
-    pub result: Vec<Vec<TimetableKV>>,
-}
+pub type Timetable = Vec<Vec<TimetableKV>>;
 
 #[derive(Deserialize, Debug)]
 pub struct TimetableKV {
@@ -137,6 +131,7 @@ impl App {
         stop_id: &String,
         stop_nr: &String,
     ) -> Result<String, Box<dyn std::error::Error>> {
+        //Fetch lines from the new server
         let mut headers = header::HeaderMap::new();
         headers.insert("Authorization", key.parse().unwrap());
         headers.insert("Content-Type", "application/json".parse().unwrap());
@@ -163,6 +158,7 @@ impl App {
         stop_nr: &String,
         bus: &String,
     ) -> Result<String, Box<dyn std::error::Error>> {
+        //Fetch departures from the new server
         let mut headers = header::HeaderMap::new();
         headers.insert("Authorization", key.parse().unwrap());
         headers.insert("Content-Type", "application/json".parse().unwrap());
@@ -206,14 +202,6 @@ impl App {
 
     pub fn get_buses(&self, stop_id: &String, stop_nr: &String) -> Vec<String> {
         // Get list of all buses from a bus stop
-        // let base: &str = env!("URL");
-        // let list_id: &str = env!("LIST_ID");
-        // let api_key: &str = env!("API_KEY");
-        //
-        // let url = format!(
-        //     "{}?id={}&busstopId={}&busstopNr={}&apikey={}",
-        //     base, list_id, stop_id, stop_nr, api_key,
-        // );
 
         let api_key: &str = env!("API_KEY");
         let mut buses: Vec<String> = Vec::new();
@@ -221,7 +209,7 @@ impl App {
         let body = self.new_fetch_lines(api_key, stop_id, stop_nr).unwrap();
         let body = body.as_str();
         let response: Response = serde_json::from_str(body).unwrap();
-        for item in &response.result {
+        for item in &response {
             for kv in &item.values {
                 buses.push(kv.value.clone());
             }
@@ -305,16 +293,7 @@ impl App {
 
     pub fn get_departures(&self, bus: String, stop_id: String, stop_nr: String) -> Departures {
         // Get all departures of a single bus.
-        // let base: &str = env!("URL");
-        // let timetable_id: &str = env!("TIMETABLE_ID");
         let api_key: &str = env!("API_KEY");
-        //
-        // let url = format!(
-        //     "{}?id={}&busstopId={}&busstopNr={}&line={}&apikey={}",
-        //     base, timetable_id, stop_id, stop_nr, bus, api_key,
-        // );
-        // let body = reqwest::blocking::get(&url).unwrap().text().unwrap();
-
         let body = self
             .new_fetch_departures(api_key, &stop_id, &stop_nr, &bus)
             .unwrap();
@@ -322,7 +301,6 @@ impl App {
         let timetable: Timetable = serde_json::from_str(body).unwrap();
 
         let dep: Vec<Departure> = timetable
-            .result
             .iter()
             .map(|group| {
                 let find = |key: &str| {
@@ -397,7 +375,7 @@ mod tests {
         let mut app = App::new();
         let output = app.run();
         let response: Timetable = serde_json::from_str(&output).unwrap();
-        let length = response.result.len();
+        let length = response.len();
         assert_eq!(length, 7);
     }
 }
