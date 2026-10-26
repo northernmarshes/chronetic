@@ -1,8 +1,5 @@
 # Chronetic
 
-> [!WARNING]  
-> Warsaw has changed its transport API; I am working on the necessary updates to the service.
-
 An e-Ink public transport timetable. The software is composed of MicroPython code for ESP32 and a Rust service.
 The service is written to parse data from the Warsaw's public transport API.
 
@@ -64,18 +61,7 @@ The device connects to the service and downloads a JSON file with 7 upcoming dep
 - API key
 
 ```
-To obtain API key you need to register for free at https://api.um.warszawa.pl
-```
-
-- URL, List ID, Timetable ID
-
-```
-Available at https://api.um.warszawa.pl/ under:
-
-dostępne dane -> transport miejski -> linie
-dostępne dane -> transport miejski -> linie -> dokumentacja
-dostępne dane -> transport miejski -> przystanki
-dostępne dane -> transport miejski -> przystanki -> dokumentacja
+To obtain API key you need to register for free at https://dane.um.warszawa.pl/
 ```
 
 - IP
