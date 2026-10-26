@@ -1,5 +1,8 @@
 # Chronetic
 
+> [!WARNING]  
+> Warsaw has changed its transport API; I am working on the necessary updates to the service.
+
 An e-Ink public transport timetable. The software is composed of MicroPython code for ESP32 and a Rust service.
 The service is written to parse data from the Warsaw's public transport API.
 
