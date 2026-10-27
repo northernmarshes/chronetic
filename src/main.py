@@ -41,7 +41,14 @@ class Chronetic(EPaper):
             print(i)
 
     def run(self):
-        now = time.time() + 7200
+
+        # Set time:
+
+        # Central European Summer Time GMT +2
+        # now = time.time() + 7200
+        # Central European Time GMT +1
+        now = time.time() + 3600
+
         timestamp = time.localtime(now)
         today = timestamp[2]
 
